@@ -50,36 +50,8 @@ const Education = () => {
     }
   ];
 
-  const onlineCourses = [
-    {
-      title: "Advanced React & Redux",
-      platform: "Udemy",
-      duration: "40 hours",
-      completed: "2023",
-      certificate: "https://udemy.com/certificate/uc-xyz123"
-    },
-    {
-      title: "AWS Solutions Architect",
-      platform: "Coursera",
-      duration: "60 hours",
-      completed: "2023",
-      certificate: "https://coursera.org/verify/abc456"
-    },
-    {
-      title: "MongoDB University",
-      platform: "MongoDB",
-      duration: "35 hours",
-      completed: "2022",
-      certificate: "https://university.mongodb.com/certification"
-    },
-    {
-      title: "Docker & Kubernetes",
-      platform: "Pluralsight",
-      duration: "25 hours",
-      completed: "2022",
-      certificate: "https://pluralsight.com/certificate/xyz789"
-    }
-  ];
+  
+
 
   return (
     <section id="education" className="py-20 bg-white">

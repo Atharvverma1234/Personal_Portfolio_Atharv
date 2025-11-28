@@ -4,9 +4,19 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        primary: '#3B82F6',
-        secondary: '#1F2937',
+      animation: {
+        'infinite-scroll': 'infinite-scroll 25s linear infinite',
+        'infinite-scroll-reverse': 'infinite-scroll-reverse 20s linear infinite',
+      },
+      keyframes: {
+        'infinite-scroll': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-100%)' },
+        },
+        'infinite-scroll-reverse': {
+          from: { transform: 'translateX(-100%)' },
+          to: { transform: 'translateX(0)' },
+        }
       },
     },
   },

@@ -15,6 +15,8 @@ const Header = () => {
             <a href="#about" className="text-gray-600 hover:text-blue-600">About</a>
             <a href="#projects" className="text-gray-600 hover:text-blue-600">Projects</a>
             <a href="#skills" className="text-gray-600 hover:text-blue-600">Skills</a>
+            <a href="#certifications" className="text-gray-600 hover:text-blue-600">Certifications</a> 
+            <a href="#achievements" className="text-gray-600 hover:text-blue-600">Achievements</a> 
             <a href="#contact" className="text-gray-600 hover:text-blue-600">Contact</a>
           </div>
 
@@ -32,7 +34,9 @@ const Header = () => {
             <a href="#home" className="block text-gray-600 hover:text-blue-600">Home</a>
             <a href="#about" className="block text-gray-600 hover:text-blue-600">About</a>
             <a href="#projects" className="block text-gray-600 hover:text-blue-600">Projects</a>
-            <a href="#skills" className="block text-gray-600 hover:text-blue-600">Skills</a>
+            <a href="#skills" className="block text-gray-600 hover:text-blue-600">Skill</a>
+            <a href="#certifications" className="block text-gray-600 hover:text-blue-600">Certifications</a> 
+            <a href="#achievements" className="block text-gray-600 hover:text-blue-600">Achievements</a> 
             <a href="#contact" className="block text-gray-600 hover:text-blue-600">Contact</a>
           </div>
         )}

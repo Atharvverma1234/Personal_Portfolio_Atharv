@@ -87,9 +87,6 @@ const Experience = () => {
           </p>
         </div>
 
-        {/* Stats Overview */}
-        
-
         {/* Timeline */}
         <div className="max-w-6xl mx-auto">
           <div className="relative">
@@ -107,7 +104,7 @@ const Experience = () => {
                 </div>
 
                 {/* Content Card */}
-                <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
+                <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:pr-12 md:text-left' : 'md:pl-12'}`}>
                   <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition duration-300">
                     {/* Year Badge */}
                     <div className={`inline-flex items-center px-4 py-2 rounded-full font-medium mb-4 ${

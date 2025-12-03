@@ -48,7 +48,7 @@ const Skills = () => {
   }, []);
 
   return (
-    <section id="skills" className="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 overflow-hidden">
+    <section id="skills" className="py-20 bg-white dark:bg-gray-900 overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">

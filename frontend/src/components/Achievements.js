@@ -48,7 +48,7 @@ const Achievements = () => {
   ];
 
   return (
-    <section id="achievements" className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <section id="achievements" className="py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">

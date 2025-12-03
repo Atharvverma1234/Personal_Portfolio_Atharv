@@ -1,118 +1,115 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const Skills = () => {
-  const skills = [
-    { name: "React", icon: "⚛️", color: "bg-blue-100 text-blue-600 border-blue-200" },
-    { name: "JavaScript", icon: "🟨", color: "bg-yellow-100 text-yellow-600 border-yellow-200" },
-    { name: "TypeScript", icon: "🔷", color: "bg-blue-100 text-blue-600 border-blue-200" },
-    { name: "Node.js", icon: "🟢", color: "bg-green-100 text-green-600 border-green-200" },
-    { name: "Express.js", icon: "🚂", color: "bg-gray-100 text-gray-600 border-gray-200" },
-    { name: "MongoDB", icon: "🍃", color: "bg-green-100 text-green-600 border-green-200" },
-    { name: "Tailwind CSS", icon: "💨", color: "bg-cyan-100 text-cyan-600 border-cyan-200" },
-    { name: "HTML5", icon: "🌐", color: "bg-orange-100 text-orange-600 border-orange-200" },
-    { name: "CSS3", icon: "🎨", color: "bg-blue-100 text-blue-600 border-blue-200" },
-    { name: "Git & GitHub", icon: "📚", color: "bg-gray-100 text-gray-600 border-gray-200" },
-    { name: "REST APIs", icon: "🔗", color: "bg-indigo-100 text-indigo-600 border-indigo-200" },
-    { name: "Redux", icon: "🔄", color: "bg-purple-100 text-purple-600 border-purple-200" },
-    { name: "Next.js", icon: "⚡", color: "bg-black text-white border-gray-800" },
-    { name: "Postman", icon: "📬", color: "bg-orange-100 text-orange-600 border-orange-200" },
-    { name: "Figma", icon: "🎯", color: "bg-purple-100 text-purple-600 border-purple-200" },
-    { name: "AWS", icon: "☁️", color: "bg-yellow-100 text-yellow-600 border-yellow-200" },
-    { name: "Docker", icon: "🐳", color: "bg-blue-100 text-blue-600 border-blue-200" },
-    { name: "JWT", icon: "🔐", color: "bg-red-100 text-red-600 border-red-200" }
+  const carouselRef = useRef(null);
+
+  const skillSets = [
+    { name: "React", icon: "⚛️", category: "frontend" },
+    { name: "JavaScript", icon: "🟨", category: "frontend" },
+    { name: "TypeScript", icon: "🔷", category: "frontend" },
+    { name: "Next.js", icon: "⚡", category: "frontend" },
+    { name: "Tailwind", icon: "💨", category: "frontend" },
+    { name: "Node.js", icon: "🟢", category: "backend" },
+    { name: "Express", icon: "🚂", category: "backend" },
+    { name: "MongoDB", icon: "🍃", category: "backend" },
+    { name: "GraphQL", icon: "📊", category: "backend" },
+    { name: "PostgreSQL", icon: "🐘", category: "backend" },
+    { name: "Git", icon: "📚", category: "tools" },
+    { name: "Docker", icon: "🐳", category: "tools" },
+    { name: "AWS", icon: "☁️", category: "tools" },
+    { name: "Figma", icon: "🎯", category: "design" },
+    { name: "Jest", icon: "🧪", category: "testing" },
   ];
 
-  // Duplicate skills for seamless loop
-  const duplicatedSkills = [...skills, ...skills, ...skills, ...skills];
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    let animationId;
+    let position = 0;
+    const speed = 0.8; // Adjust speed here
+
+    const animate = () => {
+      position -= speed;
+      if (Math.abs(position) >= carousel.scrollWidth / 2) {
+        position = 0;
+      }
+      carousel.style.transform = `translateX(${position}px)`;
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animationId = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    };
+  }, []);
 
   return (
-    <section id="skills" className="py-20 bg-white overflow-hidden">
+    <section id="skills" className="py-20 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center text-gray-800 mb-4">Skills & Technologies</h2>
-        <p className="text-lg text-gray-600 text-center mb-12 max-w-2xl mx-auto">
-          My ever-growing toolkit for building amazing digital experiences
-        </p>
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            Tech <span className="text-blue-600">Stack</span>
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Technologies I use to bring ideas to life
+          </p>
+        </div>
 
         {/* Infinite Scrolling Carousel */}
-        <div className="relative overflow-hidden py-8 group">
-          {/* Main Carousel - Left to Right */}
-          <div className="flex mb-8 animate-infinite-scroll group-hover:[animation-play-state:paused]">
-            {duplicatedSkills.map((skill, index) => (
-              <div
-                key={index}
-                className="flex-shrink-0 mx-2 transform hover:scale-110 transition duration-300"
-              >
-                <div className={`flex items-center space-x-3 px-6 py-4 rounded-2xl border-2 font-semibold shadow-lg hover:shadow-2xl transition duration-300 ${skill.color}`}>
-                  <span className="text-2xl">{skill.icon}</span>
-                  <span className="text-lg whitespace-nowrap">{skill.name}</span>
+        <div className="relative mb-16">
+          <div className="overflow-hidden py-8">
+            <div 
+              ref={carouselRef}
+              className="flex space-x-8"
+              style={{ willChange: 'transform' }}
+            >
+              {[...skillSets, ...skillSets].map((skill, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 group"
+                >
+                  <div className="w-32 h-32 bg-gradient-to-br from-white to-gray-50 rounded-2xl border border-gray-200 p-6 flex flex-col items-center justify-center shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-110 hover:-translate-y-2">
+                    <div className="text-4xl mb-3 group-hover:scale-125 transition duration-300">
+                      {skill.icon}
+                    </div>
+                    <span className="font-semibold text-gray-800">{skill.name}</span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-
-          {/* Reverse Carousel - Right to Left */}
-          <div className="flex animate-infinite-scroll-reverse group-hover:[animation-play-state:paused]">
-            {duplicatedSkills.map((skill, index) => (
-              <div
-                key={index + skills.length}
-                className="flex-shrink-0 mx-2 transform hover:scale-110 transition duration-300"
-              >
-                <div className={`flex items-center space-x-3 px-6 py-4 rounded-2xl border-2 font-semibold shadow-lg hover:shadow-2xl transition duration-300 ${skill.color} opacity-90`}>
-                  <span className="text-2xl">{skill.icon}</span>
-                  <span className="text-lg whitespace-nowrap">{skill.name}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
+          
           {/* Gradient Overlays */}
           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
         </div>
 
-        {/* Skill Progression */}
-        <div className="text-center mt-12">
-          <div className="inline-flex items-center space-x-8 bg-gray-100 rounded-2xl px-8 py-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">18+</div>
-              <div className="text-sm text-gray-600">Technologies</div>
+        {/* Skill Categories */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+          {[
+            { title: "Frontend", count: 5, color: "bg-blue-500" },
+            { title: "Backend", count: 5, color: "bg-green-500" },
+            { title: "Tools", count: 3, color: "bg-purple-500" },
+            { title: "Others", count: 2, color: "bg-orange-500" },
+          ].map((category, index) => (
+            <div 
+              key={index}
+              className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition duration-300"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-bold text-gray-800">{category.title}</h3>
+                <span className={`w-3 h-3 ${category.color} rounded-full`}></span>
+              </div>
+              <div className="text-3xl font-bold text-gray-800">{category.count}+</div>
+              <div className="text-sm text-gray-500">Technologies</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">3+</div>
-              <div className="text-sm text-gray-600">Years Experience</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600">50+</div>
-              <div className="text-sm text-gray-600">Projects Built</div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes infinite-scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(calc(-250px * ${skills.length}));
-          }
-        }
-        @keyframes infinite-scroll-reverse {
-          0% {
-            transform: translateX(calc(-250px * ${skills.length}));
-          }
-          100% {
-            transform: translateX(0);
-          }
-        }
-        .animate-infinite-scroll {
-          animation: infinite-scroll 40s linear infinite;
-        }
-        .animate-infinite-scroll-reverse {
-          animation: infinite-scroll-reverse 35s linear infinite;
-        }
-      `}</style>
     </section>
   );
 };

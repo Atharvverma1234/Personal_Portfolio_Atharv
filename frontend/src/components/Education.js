@@ -10,158 +10,120 @@ const Education = () => {
       duration: "2020 - 2022",
       gpa: "3.9/4.0",
       description: "Specialized in Artificial Intelligence and Machine Learning. Completed thesis on 'Neural Networks for Natural Language Processing'.",
-      courses: [
-        "Advanced Machine Learning",
-        "Deep Learning",
-        "Natural Language Processing",
-        "Computer Vision",
-        "Distributed Systems"
-      ],
-      achievements: [
-        "Graduated with Distinction",
-        "Recipient of Dean's Scholarship",
-        "Published research in IEEE Journal"
-      ],
-      logo: "/education/stanford-logo.png",
-      website: "https://stanford.edu"
+      logo: "🎓",
+      highlight: true
     },
     {
       id: 2,
-      degree: "B. Tech, EEE",
-      institution: "Massachusetts Institute of Technology",
+      degree: "Bachelor of Technology in Computer Engineering",
+      institution: "MIT",
       location: "Cambridge, MA",
       duration: "2016 - 2020",
       gpa: "3.8/4.0",
-      description: "Focused on Software Engineering and Web Technologies. Led the University Coding Club and organized multiple hackathons.",
-      courses: [
-        "Data Structures & Algorithms",
-        "Database Systems",
-        "Web Development",
-        "Software Engineering",
-        "Computer Networks"
-      ],
-      achievements: [
-        "Summa Cum Laude",
-        "President of Coding Club",
-        "Google Developer Student Club Lead"
-      ],
-      logo: "/education/mit-logo.png",
-      website: "https://mit.edu"
+      description: "Focused on Software Engineering and Web Technologies. Led the University Coding Club and organized hackathons.",
+      logo: "📚"
     }
   ];
 
-  
-
+  const courses = [
+    "Advanced Machine Learning",
+    "Deep Learning",
+    "Natural Language Processing",
+    "Computer Vision",
+    "Distributed Systems",
+    "Data Structures & Algorithms",
+    "Web Development",
+    "Database Systems"
+  ];
 
   return (
-    <section id="education" className="py-20 bg-white">
+    <section id="education" className="py-20 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center text-gray-800 mb-4">Education & Learning</h2>
-        <p className="text-lg text-gray-600 text-center mb-12 max-w-2xl mx-auto">
-          My academic journey and continuous learning path in technology and computer science.
-        </p>
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            <span className="text-blue-600">Education</span> & Learning
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            My academic journey and continuous learning path
+          </p>
+        </div>
 
-        {/* Two Column Education Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto mb-16">
-          {educationData.map((edu) => (
-            <div 
-              key={edu.id}
-              className="bg-gray-50 rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden border border-gray-200"
-            >
-              {/* Header with Logo */}
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
-                <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 bg-white rounded-lg flex items-center justify-center p-2">
-                    <img 
-                      src={edu.logo} 
-                      alt={`${edu.institution} logo`}
-                      className="w-full h-full object-contain"
-                    />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {/* Education Timeline */}
+          <div className="space-y-8">
+            {educationData.map((edu, index) => (
+              <div 
+                key={edu.id}
+                className={`bg-white rounded-3xl p-8 shadow-xl border border-gray-200 hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 ${
+                  edu.highlight ? 'border-l-4 border-l-blue-500' : ''
+                }`}
+              >
+                <div className="flex items-start space-x-6">
+                  <div className="flex-shrink-0">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center">
+                      <span className="text-3xl">{edu.logo}</span>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-1">{edu.degree}</h3>
-                    <a 
-                      href={edu.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-100 hover:text-white transition duration-300 text-sm"
-                    >
-                      {edu.institution}
-                    </a>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-2">{edu.degree}</h3>
+                    <div className="flex items-center flex-wrap gap-2 mb-3">
+                      <span className="font-semibold text-blue-600">{edu.institution}</span>
+                      <span className="text-gray-400">•</span>
+                      <span className="text-gray-500">{edu.location}</span>
+                      <span className="text-gray-400">•</span>
+                      <span className="text-gray-500">{edu.duration}</span>
+                    </div>
+                    <div className="inline-flex items-center px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm font-medium mb-4">
+                      GPA: {edu.gpa}
+                    </div>
+                    <p className="text-gray-600 leading-relaxed">{edu.description}</p>
                   </div>
                 </div>
               </div>
+            ))}
+          </div>
 
-              {/* Education Details */}
-              <div className="p-6">
-                {/* Basic Info */}
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600">{edu.gpa}</div>
-                    <div className="text-sm text-gray-600">GPA Score</div>
+          {/* Courses & Skills */}
+          <div className="space-y-8">
+            {/* Key Courses */}
+            <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-200">
+              <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <span className="mr-3">📖</span> Key Courses
+              </h3>
+              <div className="grid grid-cols-2 gap-3">
+                {courses.map((course, index) => (
+                  <div 
+                    key={index}
+                    className="bg-gray-50 hover:bg-blue-50 text-gray-700 hover:text-blue-600 px-4 py-3 rounded-xl text-sm font-medium transition duration-300 transform hover:scale-105 cursor-default"
+                  >
+                    {course}
                   </div>
-                  <div className="text-center">
-                    <div className="text-lg font-bold text-gray-800">{edu.duration}</div>
-                    <div className="text-sm text-gray-600">Duration</div>
-                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Learning Journey */}
+            <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl p-8 text-white">
+              <h3 className="text-2xl font-bold mb-4">Continuous Learning</h3>
+              <p className="mb-6 opacity-90">
+                "Education is not preparation for life; education is life itself."
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-white rounded-full mr-3"></div>
+                  <span>Daily coding practice</span>
                 </div>
-
-                {/* Location */}
-                <div className="flex items-center justify-center text-gray-600 mb-4">
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  {edu.location}
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-white rounded-full mr-3"></div>
+                  <span>Weekly tech articles</span>
                 </div>
-
-                {/* Description */}
-                <p className="text-gray-600 text-center mb-6 leading-relaxed">
-                  {edu.description}
-                </p>
-
-                {/* Courses */}
-                <div className="mb-6">
-                  <h4 className="font-semibold text-gray-800 mb-3 flex items-center justify-center">
-                    <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
-                    Key Courses
-                  </h4>
-                  <div className="flex flex-wrap gap-2 justify-center">
-                    {edu.courses.map((course, index) => (
-                      <span 
-                        key={index}
-                        className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-sm border border-blue-100"
-                      >
-                        {course}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Achievements */}
-                <div>
-                  <h4 className="font-semibold text-gray-800 mb-3 flex items-center justify-center">
-                    <svg className="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Achievements
-                  </h4>
-                  <ul className="space-y-2">
-                    {edu.achievements.map((achievement, index) => (
-                      <li key={index} className="flex items-center text-gray-600 text-sm">
-                        <svg className="w-4 h-4 mr-2 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        {achievement}
-                      </li>
-                    ))}
-                  </ul>
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-white rounded-full mr-3"></div>
+                  <span>Monthly online courses</span>
                 </div>
               </div>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>

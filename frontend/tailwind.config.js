@@ -5,17 +5,20 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'infinite-scroll': 'infinite-scroll 25s linear infinite',
-        'infinite-scroll-reverse': 'infinite-scroll-reverse 20s linear infinite',
+        'spin-slow': 'spin 20s linear infinite',
+        'pulse-slow': 'pulse 3s ease-in-out infinite',
+        'bounce-slow': 'bounce 2s infinite',
+        'float': 'float 6s ease-in-out infinite',
+        'fadeIn': 'fadeIn 0.3s ease-out',
       },
       keyframes: {
-        'infinite-scroll': {
-          from: { transform: 'translateX(0)' },
-          to: { transform: 'translateX(-100%)' },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
         },
-        'infinite-scroll-reverse': {
-          from: { transform: 'translateX(-100%)' },
-          to: { transform: 'translateX(0)' },
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(-10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         }
       },
     },

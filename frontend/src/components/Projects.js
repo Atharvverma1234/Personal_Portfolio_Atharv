@@ -5,48 +5,90 @@ const Projects = () => {
     {
       id: 1,
       title: "E-Commerce Platform",
-      description: "Full-stack e-commerce solution with React and Node.js",
-      tech: ["React", "Node.js", "MongoDB", "Stripe"],
+      description: "Full-stack e-commerce solution with React, Node.js, and MongoDB",
+      tags: ["React", "Node.js", "MongoDB", "Stripe"],
       image: "/project1.jpg",
-      github: "https://github.com/yourusername/project1",
-      live: "https://yourproject1.com"
+      github: "#",
+      live: "#"
     },
     {
       id: 2,
       title: "Task Management App",
-      description: "Collaborative task management application",
-      tech: ["React", "Express", "MongoDB", "Socket.io"],
+      description: "Collaborative task management with real-time updates",
+      tags: ["React", "Express", "Socket.io", "MongoDB"],
       image: "/project2.jpg",
-      github: "https://github.com/yourusername/project2",
-      live: "https://yourproject2.com"
+      github: "#",
+      live: "#"
     }
   ];
 
   return (
-    <section id="projects" className="py-20 bg-gray-50">
+    <section id="projects" className="py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">My Projects</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map(project => (
-            <div key={project.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
-              <img src={project.image} alt={project.title} className="w-full h-48 object-cover" />
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-2">{project.title}</h3>
-                <p className="text-gray-600 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map(tech => (
-                    <span key={tech} className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">
-                      {tech}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            Featured <span className="text-blue-600">Projects</span>
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Some of my recent work that I'm proud of
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {projects.map((project) => (
+            <div 
+              key={project.id}
+              className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-500 transform hover:-translate-y-2"
+            >
+              {/* Project Image */}
+              <div className="h-48 bg-gradient-to-br from-blue-400 to-purple-500 relative overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-6xl text-white opacity-20">💻</span>
+                </div>
+              </div>
+              
+              {/* Project Content */}
+              <div className="p-8">
+                <h3 className="text-2xl font-bold text-gray-800 mb-3">{project.title}</h3>
+                <p className="text-gray-600 mb-6">{project.description}</p>
+                
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.tags.map((tag, index) => (
+                    <span 
+                      key={index}
+                      className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-sm font-medium"
+                    >
+                      {tag}
                     </span>
                   ))}
                 </div>
+                
+                {/* Buttons */}
                 <div className="flex space-x-4">
-                  <a href={project.github} className="text-gray-600 hover:text-blue-600">GitHub</a>
-                  <a href={project.live} className="text-gray-600 hover:text-blue-600">Live Demo</a>
+                  <a 
+                    href={project.github}
+                    className="flex-1 text-center border-2 border-gray-300 text-gray-700 py-2 rounded-lg hover:border-blue-600 hover:text-blue-600 transition duration-300"
+                  >
+                    GitHub
+                  </a>
+                  <a 
+                    href={project.live}
+                    className="flex-1 text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 rounded-lg hover:shadow-lg transition duration-300"
+                  >
+                    Live Demo
+                  </a>
                 </div>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* View More Button */}
+        <div className="text-center mt-12">
+          <button className="border-2 border-gray-300 text-gray-700 px-8 py-3 rounded-full font-medium hover:border-blue-600 hover:text-blue-600 transition duration-300">
+            View All Projects
+          </button>
         </div>
       </div>
     </section>

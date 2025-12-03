@@ -4,21 +4,21 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import Education from './components/Education';
 import Certifications from './components/Certifications';
 import Achievements from './components/Achievements';
-import Education from './components/Education';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
-const App = () => {
+function App() {
   return (
-    <div className="App">
+    <div className="App bg-gradient-to-br from-gray-50 via-white to-blue-50">
       <Header />
       <Hero />
       <About />
-      <Education />
       <Projects />
       <Skills />
+      <Education />
       <Certifications />
       <Achievements />
       <Contact />

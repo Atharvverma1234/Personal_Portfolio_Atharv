@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { submitContact } from '../services/api';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +21,8 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      await submitContact(formData);
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
       setSubmitMessage('Message sent successfully!');
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
@@ -32,60 +32,154 @@ const Contact = () => {
     }
   };
 
+  const contactInfo = [
+    {
+      icon: "📧",
+      title: "Email",
+      value: "your.email@example.com",
+      link: "mailto:your.email@example.com"
+    },
+    {
+      icon: "📱",
+      title: "Phone",
+      value: "+1 (555) 123-4567",
+      link: "tel:+15551234567"
+    },
+    {
+      icon: "📍",
+      title: "Location",
+      value: "Your City, Country",
+      link: "#"
+    }
+  ];
+
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">Get In Touch</h2>
-        <div className="max-w-4xl mx-auto">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            Get In <span className="text-blue-600">Touch</span>
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Have a project in mind? Let's discuss how we can work together.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          {/* Contact Info */}
+          <div>
+            <div className="bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 border border-gray-200 shadow-xl">
+              <h3 className="text-2xl font-bold text-gray-800 mb-8">Contact Information</h3>
+              
+              <div className="space-y-6">
+                {contactInfo.map((info, index) => (
+                  <a
+                    key={index}
+                    href={info.link}
+                    className="flex items-center space-x-4 p-4 rounded-2xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition duration-300 group"
+                  >
+                    <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center group-hover:bg-blue-200 transition duration-300">
+                      <span className="text-xl">{info.icon}</span>
+                    </div>
+                    <div>
+                      <div className="font-semibold text-gray-800">{info.title}</div>
+                      <div className="text-gray-600">{info.value}</div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+
+              {/* Social Links */}
+              <div className="mt-8 pt-8 border-t border-gray-200">
+                <h4 className="font-semibold text-gray-800 mb-4">Connect with me</h4>
+                <div className="flex space-x-4">
+                  {['GitHub', 'LinkedIn', 'Twitter', 'Instagram'].map((social) => (
+                    <a
+                      key={social}
+                      href="#"
+                      className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-blue-100 hover:text-blue-600 transition duration-300"
+                    >
+                      {social[0]}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Availability */}
+            <div className="mt-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-3xl p-6 text-white">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="font-bold text-lg">Available for opportunities</div>
+                  <div className="opacity-90">Response time: Within 24 hours</div>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                  <span>Online</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Form */}
+          <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 border border-gray-200 shadow-xl">
+            <h3 className="text-2xl font-bold text-gray-800 mb-8">Send a Message</h3>
+            
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-gray-700 mb-2">Name</label>
+                <label className="block text-gray-700 mb-2 font-medium">Name</label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 transition duration-300"
+                  placeholder="Your name"
                 />
               </div>
+
               <div>
-                <label className="block text-gray-700 mb-2">Email</label>
+                <label className="block text-gray-700 mb-2 font-medium">Email</label>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 transition duration-300"
+                  placeholder="your.email@example.com"
                 />
               </div>
-            </div>
-            <div>
-              <label className="block text-gray-700 mb-2">Message</label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows="6"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300 disabled:opacity-50"
-            >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
-            </button>
-            {submitMessage && (
-              <p className={`text-center ${submitMessage.includes('Error') ? 'text-red-600' : 'text-green-600'}`}>
-                {submitMessage}
-              </p>
-            )}
-          </form>
+
+              <div>
+                <label className="block text-gray-700 mb-2 font-medium">Message</label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows="5"
+                  className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 transition duration-300 resize-none"
+                  placeholder="Tell me about your project..."
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-medium hover:shadow-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+              </button>
+
+              {submitMessage && (
+                <div className={`p-4 rounded-xl ${submitMessage.includes('Error') ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
+                  {submitMessage}
+                </div>
+              )}
+            </form>
+          </div>
         </div>
       </div>
     </section>

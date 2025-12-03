@@ -41,20 +41,20 @@ const Achievements = () => {
   ];
 
   const stats = [
-    { value: "10+", label: "Projects", color: "text-blue-600" },
-    { value: "50+", label: "Happy Clients", color: "text-green-600" },
-    { value: "99%", label: "Success Rate", color: "text-purple-600" },
-    { value: "5+", label: "Years Experience", color: "text-orange-600" }
+    { value: "10+", label: "Projects", color: "text-blue-600 dark:text-blue-400" },
+    { value: "50+", label: "Happy Clients", color: "text-green-600 dark:text-green-400" },
+    { value: "99%", label: "Success Rate", color: "text-purple-600 dark:text-purple-400" },
+    { value: "5+", label: "Years Experience", color: "text-orange-600 dark:text-orange-400" }
   ];
 
   return (
-    <section id="achievements" className="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section id="achievements" className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">
-            <span className="text-blue-600">Achievements</span> & Awards
+          <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
+            <span className="text-blue-600 dark:text-blue-400">Achievements</span> & Awards
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Recognitions and milestones in my professional journey
           </p>
         </div>
@@ -64,10 +64,10 @@ const Achievements = () => {
           {stats.map((stat, index) => (
             <div 
               key={index}
-              className="bg-white rounded-2xl p-6 text-center border border-gray-200 shadow-lg hover:shadow-xl transition duration-300"
+              className="bg-white dark:bg-gray-800 rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition duration-300"
             >
               <div className={`text-3xl font-bold mb-2 ${stat.color}`}>{stat.value}</div>
-              <div className="text-gray-600">{stat.label}</div>
+              <div className="text-gray-600 dark:text-gray-400">{stat.label}</div>
             </div>
           ))}
         </div>
@@ -77,26 +77,26 @@ const Achievements = () => {
           {achievements.map((achievement) => (
             <div 
               key={achievement.id}
-              className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl hover:shadow-2xl transition duration-500 transform hover:-translate-y-2"
+              className="bg-white dark:bg-gray-800 rounded-3xl p-8 border border-gray-200 dark:border-gray-700 shadow-xl hover:shadow-2xl transition duration-500 transform hover:-translate-y-2"
             >
               <div className="flex items-start space-x-6">
                 <div className="flex-shrink-0">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 rounded-2xl flex items-center justify-center">
                     <span className="text-3xl">{achievement.icon}</span>
                   </div>
                 </div>
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center gap-2 mb-2">
-                    <h3 className="text-xl font-bold text-gray-800">{achievement.title}</h3>
-                    <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium">
+                    <h3 className="text-xl font-bold text-gray-800 dark:text-white">{achievement.title}</h3>
+                    <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-full text-xs font-medium">
                       {achievement.date}
                     </span>
                   </div>
-                  <p className="text-blue-600 font-medium mb-3">{achievement.organization}</p>
-                  <p className="text-gray-600 mb-4">{achievement.description}</p>
-                  <div className="bg-gray-50 rounded-xl p-3">
-                    <div className="text-sm text-gray-500">Impact</div>
-                    <div className="font-semibold text-gray-800">{achievement.metrics}</div>
+                  <p className="text-blue-600 dark:text-blue-400 font-medium mb-3">{achievement.organization}</p>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">{achievement.description}</p>
+                  <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-3">
+                    <div className="text-sm text-gray-500 dark:text-gray-400">Impact</div>
+                    <div className="font-semibold text-gray-800 dark:text-white">{achievement.metrics}</div>
                   </div>
                 </div>
               </div>

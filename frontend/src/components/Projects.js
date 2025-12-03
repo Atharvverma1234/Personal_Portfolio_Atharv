@@ -7,7 +7,6 @@ const Projects = () => {
       title: "E-Commerce Platform",
       description: "Full-stack e-commerce solution with React, Node.js, and MongoDB",
       tags: ["React", "Node.js", "MongoDB", "Stripe"],
-      image: "/project1.jpg",
       github: "#",
       live: "#"
     },
@@ -16,20 +15,19 @@ const Projects = () => {
       title: "Task Management App",
       description: "Collaborative task management with real-time updates",
       tags: ["React", "Express", "Socket.io", "MongoDB"],
-      image: "/project2.jpg",
       github: "#",
       live: "#"
     }
   ];
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section id="projects" className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">
-            Featured <span className="text-blue-600">Projects</span>
+          <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
+            Featured <span className="text-blue-600 dark:text-blue-400">Projects</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Some of my recent work that I'm proud of
           </p>
         </div>
@@ -38,7 +36,7 @@ const Projects = () => {
           {projects.map((project) => (
             <div 
               key={project.id}
-              className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-500 transform hover:-translate-y-2"
+              className="bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700"
             >
               {/* Project Image */}
               <div className="h-48 bg-gradient-to-br from-blue-400 to-purple-500 relative overflow-hidden">
@@ -49,15 +47,15 @@ const Projects = () => {
               
               {/* Project Content */}
               <div className="p-8">
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">{project.title}</h3>
-                <p className="text-gray-600 mb-6">{project.description}</p>
+                <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-3">{project.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-6">{project.description}</p>
                 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.tags.map((tag, index) => (
                     <span 
                       key={index}
-                      className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-sm font-medium"
+                      className="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-full text-sm font-medium"
                     >
                       {tag}
                     </span>
@@ -68,7 +66,7 @@ const Projects = () => {
                 <div className="flex space-x-4">
                   <a 
                     href={project.github}
-                    className="flex-1 text-center border-2 border-gray-300 text-gray-700 py-2 rounded-lg hover:border-blue-600 hover:text-blue-600 transition duration-300"
+                    className="flex-1 text-center border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 py-2 rounded-lg hover:border-blue-600 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300"
                   >
                     GitHub
                   </a>
@@ -86,7 +84,7 @@ const Projects = () => {
 
         {/* View More Button */}
         <div className="text-center mt-12">
-          <button className="border-2 border-gray-300 text-gray-700 px-8 py-3 rounded-full font-medium hover:border-blue-600 hover:text-blue-600 transition duration-300">
+          <button className="border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-8 py-3 rounded-full font-medium hover:border-blue-600 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300">
             View All Projects
           </button>
         </div>

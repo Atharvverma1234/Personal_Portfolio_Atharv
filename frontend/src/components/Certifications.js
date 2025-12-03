@@ -43,13 +43,13 @@ const Certifications = () => {
   ];
 
   return (
-    <section id="certifications" className="py-20 bg-white">
+    <section id="certifications" className="py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">
-            Professional <span className="text-blue-600">Certifications</span>
+          <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
+            Professional <span className="text-blue-600 dark:text-blue-400">Certifications</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Validated expertise through industry-recognized certifications
           </p>
         </div>
@@ -58,7 +58,7 @@ const Certifications = () => {
           {certifications.map((cert) => (
             <div 
               key={cert.id}
-              className="bg-white rounded-3xl border border-gray-200 shadow-xl hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 overflow-hidden group cursor-pointer"
+              className="bg-white dark:bg-gray-800 rounded-3xl border border-gray-200 dark:border-gray-700 shadow-xl hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 overflow-hidden group cursor-pointer"
               onClick={() => setSelectedCert(cert)}
             >
               <div className={`h-3 bg-gradient-to-r ${cert.color}`}></div>
@@ -68,19 +68,19 @@ const Certifications = () => {
                     <span className="text-3xl">{cert.icon}</span>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition duration-300">
+                    <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition duration-300">
                       {cert.title}
                     </h3>
                     <div className="flex items-center flex-wrap gap-2 mb-4">
-                      <span className="font-medium text-gray-600">{cert.issuer}</span>
+                      <span className="font-medium text-gray-600 dark:text-gray-300">{cert.issuer}</span>
                       <span className="text-gray-400">•</span>
-                      <span className="text-gray-500">{cert.date}</span>
+                      <span className="text-gray-500 dark:text-gray-400">{cert.date}</span>
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {cert.skills.map((skill, index) => (
                         <span 
                           key={index}
-                          className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium"
+                          className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm font-medium"
                         >
                           {skill}
                         </span>
@@ -95,56 +95,56 @@ const Certifications = () => {
 
         {/* Certification Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-12">
-          <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6 text-center border border-gray-200">
-            <div className="text-3xl font-bold text-blue-600 mb-2">4</div>
-            <div className="text-gray-600">Certifications</div>
+          <div className="bg-gradient-to-br from-blue-50 to-white dark:from-blue-900/20 dark:to-gray-800 rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-700">
+            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">4</div>
+            <div className="text-gray-600 dark:text-gray-400">Certifications</div>
           </div>
-          <div className="bg-gradient-to-br from-green-50 to-white rounded-2xl p-6 text-center border border-gray-200">
-            <div className="text-3xl font-bold text-green-600 mb-2">100%</div>
-            <div className="text-gray-600">Pass Rate</div>
+          <div className="bg-gradient-to-br from-green-50 to-white dark:from-green-900/20 dark:to-gray-800 rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-700">
+            <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">100%</div>
+            <div className="text-gray-600 dark:text-gray-400">Pass Rate</div>
           </div>
-          <div className="bg-gradient-to-br from-purple-50 to-white rounded-2xl p-6 text-center border border-gray-200">
-            <div className="text-3xl font-bold text-purple-600 mb-2">2</div>
-            <div className="text-gray-600">Years Active</div>
+          <div className="bg-gradient-to-br from-purple-50 to-white dark:from-purple-900/20 dark:to-gray-800 rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-700">
+            <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">2</div>
+            <div className="text-gray-600 dark:text-gray-400">Years Active</div>
           </div>
-          <div className="bg-gradient-to-br from-orange-50 to-white rounded-2xl p-6 text-center border border-gray-200">
-            <div className="text-3xl font-bold text-orange-600 mb-2">4</div>
-            <div className="text-gray-600">Providers</div>
+          <div className="bg-gradient-to-br from-orange-50 to-white dark:from-orange-900/20 dark:to-gray-800 rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-700">
+            <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">4</div>
+            <div className="text-gray-600 dark:text-gray-400">Providers</div>
           </div>
         </div>
 
         {/* Modal for Certificate Details */}
         {selectedCert && (
           <div 
-            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black/50 dark:bg-black/70 flex items-center justify-center z-50 p-4"
             onClick={() => setSelectedCert(null)}
           >
             <div 
-              className="bg-white rounded-3xl max-w-2xl w-full p-8"
+              className="bg-white dark:bg-gray-800 rounded-3xl max-w-2xl w-full p-8"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-start mb-6">
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-800">{selectedCert.title}</h3>
-                  <p className="text-gray-600">{selectedCert.issuer}</p>
+                  <h3 className="text-2xl font-bold text-gray-800 dark:text-white">{selectedCert.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">{selectedCert.issuer}</p>
                 </div>
                 <button 
                   onClick={() => setSelectedCert(null)}
-                  className="text-gray-400 hover:text-gray-600 text-2xl"
+                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-2xl"
                 >
                   ✕
                 </button>
               </div>
               <div className="space-y-4">
-                <div className="flex items-center text-gray-600">
+                <div className="flex items-center text-gray-600 dark:text-gray-300">
                   <span className="font-medium mr-2">Issued:</span>
                   {selectedCert.date}
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-800 mb-2">Skills Validated:</h4>
+                  <h4 className="font-semibold text-gray-800 dark:text-white mb-2">Skills Validated:</h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedCert.skills.map((skill, index) => (
-                      <span key={index} className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">
+                      <span key={index} className="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-full text-sm">
                         {skill}
                       </span>
                     ))}

@@ -9,7 +9,7 @@ const Education = () => {
       location: "Stanford, CA",
       duration: "2020 - 2022",
       gpa: "3.9/4.0",
-      description: "Specialized in Artificial Intelligence and Machine Learning. Completed thesis on 'Neural Networks for Natural Language Processing'.",
+      description: "Specialized in Artificial Intelligence and Machine Learning.",
       logo: "🎓",
       highlight: true
     },
@@ -20,7 +20,7 @@ const Education = () => {
       location: "Cambridge, MA",
       duration: "2016 - 2020",
       gpa: "3.8/4.0",
-      description: "Focused on Software Engineering and Web Technologies. Led the University Coding Club and organized hackathons.",
+      description: "Focused on Software Engineering and Web Technologies.",
       logo: "📚"
     }
   ];
@@ -37,13 +37,13 @@ const Education = () => {
   ];
 
   return (
-    <section id="education" className="py-20 bg-gradient-to-b from-white to-gray-50">
+    <section id="education" className="py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">
-            <span className="text-blue-600">Education</span> & Learning
+          <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
+            <span className="text-blue-600 dark:text-blue-400">Education</span> & Learning
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             My academic journey and continuous learning path
           </p>
         </div>
@@ -54,29 +54,29 @@ const Education = () => {
             {educationData.map((edu, index) => (
               <div 
                 key={edu.id}
-                className={`bg-white rounded-3xl p-8 shadow-xl border border-gray-200 hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 ${
+                className={`bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 ${
                   edu.highlight ? 'border-l-4 border-l-blue-500' : ''
                 }`}
               >
                 <div className="flex items-start space-x-6">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 rounded-2xl flex items-center justify-center">
                       <span className="text-3xl">{edu.logo}</span>
                     </div>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-2">{edu.degree}</h3>
+                    <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{edu.degree}</h3>
                     <div className="flex items-center flex-wrap gap-2 mb-3">
-                      <span className="font-semibold text-blue-600">{edu.institution}</span>
+                      <span className="font-semibold text-blue-600 dark:text-blue-400">{edu.institution}</span>
                       <span className="text-gray-400">•</span>
-                      <span className="text-gray-500">{edu.location}</span>
+                      <span className="text-gray-500 dark:text-gray-400">{edu.location}</span>
                       <span className="text-gray-400">•</span>
-                      <span className="text-gray-500">{edu.duration}</span>
+                      <span className="text-gray-500 dark:text-gray-400">{edu.duration}</span>
                     </div>
-                    <div className="inline-flex items-center px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm font-medium mb-4">
+                    <div className="inline-flex items-center px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full text-sm font-medium mb-4">
                       GPA: {edu.gpa}
                     </div>
-                    <p className="text-gray-600 leading-relaxed">{edu.description}</p>
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{edu.description}</p>
                   </div>
                 </div>
               </div>
@@ -86,15 +86,15 @@ const Education = () => {
           {/* Courses & Skills */}
           <div className="space-y-8">
             {/* Key Courses */}
-            <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-200">
-              <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+            <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl border border-gray-200 dark:border-gray-700">
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center">
                 <span className="mr-3">📖</span> Key Courses
               </h3>
               <div className="grid grid-cols-2 gap-3">
                 {courses.map((course, index) => (
                   <div 
                     key={index}
-                    className="bg-gray-50 hover:bg-blue-50 text-gray-700 hover:text-blue-600 px-4 py-3 rounded-xl text-sm font-medium transition duration-300 transform hover:scale-105 cursor-default"
+                    className="bg-gray-50 dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-4 py-3 rounded-xl text-sm font-medium transition duration-300 transform hover:scale-105 cursor-default"
                   >
                     {course}
                   </div>

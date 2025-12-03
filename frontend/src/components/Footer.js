@@ -20,7 +20,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-gray-900 to-gray-800 text-white pt-20 pb-10">
+    <footer className="bg-gradient-to-br from-gray-900 to-gray-800 dark:from-gray-950 dark:to-gray-900 text-white pt-20 pb-10">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Brand Section */}
@@ -42,7 +42,7 @@ const Footer = () => {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition duration-300 transform hover:scale-110"
+                  className="w-10 h-10 bg-gray-800 dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition duration-300 transform hover:scale-110"
                   aria-label={social.name}
                 >
                   <span className="text-lg">{social.icon}</span>
@@ -77,7 +77,7 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Your email"
-                className="flex-1 bg-gray-800 text-white px-4 py-3 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-1 bg-gray-800 dark:bg-gray-700 text-white px-4 py-3 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <button className="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-3 rounded-r-lg font-medium hover:opacity-90 transition duration-300">
                 Subscribe
@@ -87,7 +87,7 @@ const Footer = () => {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-800 my-8"></div>
+        <div className="border-t border-gray-800 dark:border-gray-700 my-8"></div>
 
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center">

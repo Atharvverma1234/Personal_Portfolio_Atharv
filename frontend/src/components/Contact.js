@@ -36,19 +36,19 @@ const Contact = () => {
     {
       icon: "📧",
       title: "Email",
-      value: "your.email@example.com",
-      link: "mailto:your.email@example.com"
+      value: "atharvverma2905@gmail.com",
+      link: "mailto:atharvverma2905@gmail.com"
     },
     {
       icon: "📱",
       title: "Phone",
-      value: "+1 (555) 123-4567",
-      link: "tel:+15551234567"
+      value: "+91 8470862596",
+      link: "tel:+918470862596"
     },
     {
       icon: "📍",
       title: "Location",
-      value: "Your City, Country",
+      value: "Lucknow, Uttar Pradesh, India",
       link: "#"
     }
   ];

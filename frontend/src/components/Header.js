@@ -47,7 +47,6 @@ const Header = () => {
           >
             YourName
           </a>
-          
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             {/* Main Navigation Items */}

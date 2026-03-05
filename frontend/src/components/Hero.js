@@ -23,8 +23,6 @@ const Hero = () => {
             </h1>
             
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-              Full Stack Developer passionate about creating amazing digital experiences. 
-              I build modern web applications with clean code and beautiful designs.
             </p>
             
             <div className="flex flex-wrap gap-4">

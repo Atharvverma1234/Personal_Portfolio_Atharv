@@ -96,7 +96,7 @@ const Contact = () => {
                   {['GitHub', 'LinkedIn', 'Twitter', 'Instagram'].map((social) => (
                     <a
                       key={social}
-                      href="#"
+                      href="/"
                       className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300"
                     >
                       {social[0]}

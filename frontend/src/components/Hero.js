@@ -165,7 +165,7 @@ const Hero = () => {
 
             <div className="flex gap-5 mt-1">
               {['GitHub', 'LinkedIn', 'Twitter', 'Instagram'].map((s) => (
-                <a key={s} href="#"
+                <a key={s} href="/"
                   className="text-sm tracking-wide transition-colors duration-200 hover:text-indigo-400"
                   style={{ color: t.socialText }}
                 >

@@ -98,15 +98,7 @@ const Hero = () => {
       className="min-h-screen flex items-center pt-20 overflow-hidden relative transition-colors duration-300"
       style={{ background: t.sectionBg }}
     >
-      {/* Grid */}
-      <div
-        className="absolute inset-0 transition-opacity duration-300"
-        style={{
-          backgroundImage: `linear-gradient(${t.gridLine} 1px,transparent 1px),linear-gradient(90deg,${t.gridLine} 1px,transparent 1px)`,
-          backgroundSize: '60px 60px',
-          maskImage: 'radial-gradient(ellipse 80% 60% at 50% 50%,black 40%,transparent 100%)',
-        }}
-      />
+      
 
       {/* Ambient glows */}
       <div className="absolute w-[600px] h-[600px] rounded-full -top-24 right-0 pointer-events-none blur-[120px] transition-all duration-300"

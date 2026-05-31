@@ -12,6 +12,7 @@ import Volunteering from './components/Volunteering';
 import Achievements from './components/Achievements';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Background3D from './components/Background3D';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <div className="App relative min-h-screen">
         
         <div className="relative z-10">
+          <Background3D />
           <Header />
           <Hero />
           <About />

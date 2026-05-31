@@ -226,7 +226,7 @@ const Footer = () => {
           {['Privacy Policy', 'Terms of Service', 'Sitemap'].map((item) => (
             <a
               key={item}
-              href="#"
+              href="/"
               style={{ fontSize:12, color:t.botLink, textDecoration:'none', transition:'color 0.18s' }}
               onMouseEnter={(e) => { e.currentTarget.style.color=t.botHover; }}
               onMouseLeave={(e) => { e.currentTarget.style.color=t.botLink; }}

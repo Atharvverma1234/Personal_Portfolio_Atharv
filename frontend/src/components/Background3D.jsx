@@ -26,8 +26,21 @@ const Particles = () => {
 };
 
 const Background3D = () => (
-  <div style={{ position:'fixed', inset:0, zIndex:0, pointerEvents:'none' }}>
-    <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+  <div
+    style={{
+      position: "fixed",
+      inset: 0,
+      zIndex: 0,
+      pointerEvents: "none",
+      background: "#020617", // very dark slate
+    }}
+  >
+    <Canvas
+      camera={{ position: [0, 0, 5], fov: 75 }}
+      gl={{ alpha: true }}
+    >
+      <fog attach="fog" args={["#020617", 5, 20]} />
+
       <Particles />
     </Canvas>
   </div>

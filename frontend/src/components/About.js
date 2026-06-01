@@ -173,28 +173,18 @@ const About = () => {
 
   return (
     <section
-      id="about"
-      style={{
-        background: t.sectionBg,
-        fontFamily: "'DM Sans', sans-serif",
-        padding: "72px 32px",
-        overflow: "hidden",
-        position: "relative",
-        transition: "background 0.35s",
-      }}
-    >
-      {/* Grid bg */}
-      <div style={{
-        position: "absolute", inset: 0,
-        backgroundImage: `linear-gradient(${t.gridLine} 1px,transparent 1px),linear-gradient(90deg,${t.gridLine} 1px,transparent 1px)`,
-        backgroundSize: "60px 60px",
-        maskImage: "radial-gradient(ellipse 80% 70% at 50% 50%,black 30%,transparent 100%)",
-      }} />
+  id="about"
+  style={{
+    background: "transparent",
+    fontFamily: "'DM Sans', sans-serif",
+    padding: "72px 32px",
+    overflow: "hidden",
+    position: "relative",
+  }}
+>
+      
 
-      {/* Ambient glows */}
-      <div style={{ position:"absolute", borderRadius:"50%", filter:"blur(100px)", pointerEvents:"none", width:420, height:420, top:-60, left:-60, background:t.glow1, transition:"background 0.35s" }} />
-      <div style={{ position:"absolute", borderRadius:"50%", filter:"blur(100px)", pointerEvents:"none", width:380, height:380, bottom:-40, right:-40, background:t.glow2, transition:"background 0.35s" }} />
-
+      
       <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:56, alignItems:"center", maxWidth:1040, margin:"0 auto", position:"relative", zIndex:1 }}>
 
         {/* ── LEFT: 3D card ────────────────────────────────────── */}

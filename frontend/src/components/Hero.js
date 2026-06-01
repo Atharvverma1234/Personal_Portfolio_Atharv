@@ -33,93 +33,81 @@ const Hero = () => {
     };
   }, []);
 
-  // ── theme tokens ──────────────────────────────────────────────
   const t = isDarkMode
     ? {
-        sectionBg:      '#060912',
-        gridLine:       'rgba(99,102,241,0.07)',
-        headingColor:   '#ffffff',
-        subText:        '#94a3b8',
-        badgeBg:        'rgba(99,102,241,0.10)',
-        badgeBorder:    'rgba(99,102,241,0.25)',
-        badgeText:      '#a5b4fc',
-        btnOutlineBorder: 'rgba(100,116,139,0.4)',
-        btnOutlineText: '#94a3b8',
-        btnOutlineHoverBorder: 'rgba(99,102,241,0.5)',
-        btnOutlineHoverText:   '#a5b4fc',
-        socialText:     '#64748b',
-        cardBg:         'linear-gradient(145deg,#1e1b4b 0%,#0f172a 60%,#1a1035 100%)',
-        cardBorder:     'rgba(99,102,241,0.2)',
-        avatarInner:    '#0f172a',
-        chipBg:         '#0f172a',
-        chipBorder:     'rgba(99,102,241,0.25)',
-        chipText:       '#e2e8f0',
-        edgeRight:      'linear-gradient(to right,rgba(30,27,75,0.9),rgba(15,23,42,0.7))',
-        edgeBottom:     'linear-gradient(to bottom,rgba(30,27,75,0.9),rgba(15,23,42,0.4))',
-        edgeBorder:     'rgba(99,102,241,0.1)',
-        ambientBlue:    'rgba(59,130,246,0.15)',
-        ambientPurple:  'rgba(139,92,246,0.15)',
+        headingColor:         '#ffffff',
+        subText:              '#94a3b8',
+        badgeBg:              'rgba(99,102,241,0.10)',
+        badgeBorder:          'rgba(99,102,241,0.25)',
+        badgeText:            '#a5b4fc',
+        btnOutlineBorder:     'rgba(100,116,139,0.4)',
+        btnOutlineText:       '#94a3b8',
+        btnOutlineHoverBorder:'rgba(99,102,241,0.5)',
+        btnOutlineHoverText:  '#a5b4fc',
+        socialText:           '#64748b',
+        cardBg:               'linear-gradient(145deg,#1e1b4b 0%,#0f172a 60%,#1a1035 100%)',
+        cardBorder:           'rgba(99,102,241,0.2)',
+        avatarInner:          '#0f172a',
+        chipBg:               '#0f172a',
+        chipBorder:           'rgba(99,102,241,0.25)',
+        chipText:             '#e2e8f0',
+        edgeRight:            'linear-gradient(to right,rgba(30,27,75,0.9),rgba(15,23,42,0.7))',
+        edgeBottom:           'linear-gradient(to bottom,rgba(30,27,75,0.9),rgba(15,23,42,0.4))',
+        edgeBorder:           'rgba(99,102,241,0.1)',
+        orbBlue:              'rgba(99,102,241,0.15)',
+        orbPurple:            'rgba(192,132,252,0.12)',
       }
     : {
-        sectionBg:      '#f8f7ff',
-        gridLine:       'rgba(99,102,241,0.06)',
-        headingColor:   '#1e1b4b',
-        subText:        '#475569',
-        badgeBg:        'rgba(99,102,241,0.08)',
-        badgeBorder:    'rgba(99,102,241,0.2)',
-        badgeText:      '#4338ca',
-        btnOutlineBorder: 'rgba(100,116,139,0.35)',
-        btnOutlineText: '#475569',
-        btnOutlineHoverBorder: 'rgba(99,102,241,0.5)',
-        btnOutlineHoverText:   '#4338ca',
-        socialText:     '#94a3b8',
-        cardBg:         'linear-gradient(145deg,#ede9fe 0%,#f5f3ff 60%,#faf5ff 100%)',
-        cardBorder:     'rgba(99,102,241,0.25)',
-        avatarInner:    '#ede9fe',
-        chipBg:         '#ffffff',
-        chipBorder:     'rgba(99,102,241,0.2)',
-        chipText:       '#3730a3',
-        edgeRight:      'linear-gradient(to right,rgba(167,139,250,0.25),transparent)',
-        edgeBottom:     'linear-gradient(to bottom,rgba(167,139,250,0.25),transparent)',
-        edgeBorder:     'rgba(99,102,241,0.12)',
-        ambientBlue:    'rgba(99,102,241,0.08)',
-        ambientPurple:  'rgba(192,132,252,0.08)',
+        headingColor:         '#1e1b4b',
+        subText:              '#475569',
+        badgeBg:              'rgba(99,102,241,0.08)',
+        badgeBorder:          'rgba(99,102,241,0.2)',
+        badgeText:            '#4338ca',
+        btnOutlineBorder:     'rgba(100,116,139,0.35)',
+        btnOutlineText:       '#475569',
+        btnOutlineHoverBorder:'rgba(99,102,241,0.5)',
+        btnOutlineHoverText:  '#4338ca',
+        socialText:           '#94a3b8',
+        cardBg:               'linear-gradient(145deg,#ede9fe 0%,#f5f3ff 60%,#faf5ff 100%)',
+        cardBorder:           'rgba(99,102,241,0.25)',
+        avatarInner:          '#ede9fe',
+        chipBg:               '#ffffff',
+        chipBorder:           'rgba(99,102,241,0.2)',
+        chipText:             '#3730a3',
+        edgeRight:            'linear-gradient(to right,rgba(167,139,250,0.25),transparent)',
+        edgeBottom:           'linear-gradient(to bottom,rgba(167,139,250,0.25),transparent)',
+        edgeBorder:           'rgba(99,102,241,0.12)',
+        orbBlue:              'rgba(99,102,241,0.08)',
+        orbPurple:            'rgba(192,132,252,0.06)',
       };
 
   const chips = [
-    { label: 'React Dev',    icon: '⚛️', cls: 'top-10 -left-16',  iconBg: isDarkMode ? 'rgba(99,102,241,0.15)' : 'rgba(99,102,241,0.1)',  delay: '0s'   },
-    { label: 'Kaiju Killer', icon: '🤖', cls: 'bottom-14 -right-12', iconBg: isDarkMode ? 'rgba(192,132,252,0.15)' : 'rgba(192,132,252,0.1)', delay: '1.5s' },
-    { label: 'Open to work', icon: null, cls: 'top-1/2 -left-20', iconBg: null, delay: '0.8s', dot: true },
+    { label: 'React Dev',    icon: '⚛️', style: { top: 40, left: -64 },  iconBg: isDarkMode ? 'rgba(99,102,241,0.15)' : 'rgba(99,102,241,0.1)',  delay: '0s'   },
+    { label: 'Kaiju Killer', icon: '🤖', style: { bottom: 56, right: -48 }, iconBg: isDarkMode ? 'rgba(192,132,252,0.15)' : 'rgba(192,132,252,0.1)', delay: '1.5s' },
+    { label: 'Open to work', icon: null, style: { top: '50%', left: -80 }, delay: '0.8s', dot: true },
   ];
 
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center pt-20 overflow-hidden relative transition-colors duration-300"
-      style={{ background: t.sectionBg }}
+      className="min-h-screen flex items-center pt-20 overflow-hidden relative"
+      style={{ background: 'transparent' }} // ← transparent: 3D bg shows through
     >
-      
-
-      {/* Ambient glows */}
-      <div className="absolute w-[600px] h-[600px] rounded-full -top-24 right-0 pointer-events-none blur-[120px] transition-all duration-300"
-        style={{ background: t.ambientBlue, opacity: isDarkMode ? 0.15 : 0.6 }} />
-      <div className="absolute w-[600px] h-[600px] rounded-full -bottom-24 left-0 pointer-events-none blur-[120px] transition-all duration-300"
-        style={{ background: t.ambientPurple, opacity: isDarkMode ? 0.15 : 0.5 }} />
-
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
 
-          {/* Left */}
+          {/* ── Left ── */}
           <div className="flex flex-col gap-5">
             <span
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium w-fit transition-colors duration-300"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium w-fit"
               style={{ background: t.badgeBg, border: `1px solid ${t.badgeBorder}`, color: t.badgeText }}
             >
               <span className={`w-2 h-2 rounded-full animate-pulse ${isDarkMode ? 'bg-indigo-500' : 'bg-indigo-600'}`} />
               Available for opportunities
             </span>
 
-            <h1 className="font-extrabold leading-tight tracking-tight transition-colors duration-300"
+            <h1
+              className="font-extrabold leading-tight tracking-tight"
               style={{ fontFamily: "'Syne',sans-serif", fontSize: 'clamp(42px,5vw,68px)', color: t.headingColor }}
             >
               Hi, I'm{' '}
@@ -133,7 +121,7 @@ const Hero = () => {
               </span>
             </h1>
 
-            <p className="text-base leading-relaxed max-w-sm transition-colors duration-300" style={{ color: t.subText }}>
+            <p className="text-base leading-relaxed max-w-sm" style={{ color: t.subText }}>
               Building products that don't apologize for being great. Crafting experiences at the
               intersection of engineering and design.
             </p>
@@ -149,7 +137,7 @@ const Hero = () => {
                 className="px-7 py-3 rounded-full text-sm font-medium transition-all duration-200"
                 style={{ border: `1px solid ${t.btnOutlineBorder}`, color: t.btnOutlineText }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = t.btnOutlineHoverBorder; e.currentTarget.style.color = t.btnOutlineHoverText; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = t.btnOutlineBorder; e.currentTarget.style.color = t.btnOutlineText; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = t.btnOutlineBorder;       e.currentTarget.style.color = t.btnOutlineText; }}
               >
                 Contact Me
               </button>
@@ -157,7 +145,8 @@ const Hero = () => {
 
             <div className="flex gap-5 mt-1">
               {['GitHub', 'LinkedIn', 'Twitter', 'Instagram'].map((s) => (
-                <a key={s} href="/"
+                <a
+                  key={s} href="/"
                   className="text-sm tracking-wide transition-colors duration-200 hover:text-indigo-400"
                   style={{ color: t.socialText }}
                 >
@@ -167,21 +156,31 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right — 3D Card */}
-          <div ref={sceneRef} className="relative flex items-center justify-center" style={{ height: 460, perspective: 900 }}>
+          {/* ── Right — 3D Card ── */}
+          <div
+            ref={sceneRef}
+            className="relative flex items-center justify-center"
+            style={{ height: 460, perspective: 900 }}
+          >
+            {/* Soft orbs — purely decorative, low opacity so 3D bg still reads */}
             <div className="absolute w-44 h-44 rounded-full top-5 right-5 pointer-events-none"
-              style={{ background: `radial-gradient(circle,${t.ambientBlue} 0%,transparent 70%)`, animation: 'orbpulse 4s ease-in-out infinite' }} />
+              style={{ background: `radial-gradient(circle,${t.orbBlue} 0%,transparent 70%)`, animation: 'orbpulse 4s ease-in-out infinite' }} />
             <div className="absolute w-28 h-28 rounded-full bottom-10 left-8 pointer-events-none"
-              style={{ background: `radial-gradient(circle,${t.ambientPurple} 0%,transparent 70%)`, animation: 'orbpulse 4s ease-in-out infinite 2s' }} />
+              style={{ background: `radial-gradient(circle,${t.orbPurple} 0%,transparent 70%)`, animation: 'orbpulse 4s ease-in-out infinite 2s' }} />
 
             {/* 3D Card */}
-            <div ref={cardRef} className="relative cursor-pointer" style={{
-              width: 260, height: 340,
-              transformStyle: 'preserve-3d',
-              transform: 'rotateY(-15deg) rotateX(8deg)',
-              animation: 'float3d 6s ease-in-out infinite',
-            }}>
-              <div className="absolute inset-0 rounded-3xl flex flex-col items-center justify-center gap-4 px-6 py-8 transition-all duration-300"
+            <div
+              ref={cardRef}
+              className="relative cursor-pointer"
+              style={{
+                width: 260, height: 340,
+                transformStyle: 'preserve-3d',
+                transform: 'rotateY(-15deg) rotateX(8deg)',
+                animation: 'float3d 6s ease-in-out infinite',
+              }}
+            >
+              <div
+                className="absolute inset-0 rounded-3xl flex flex-col items-center justify-center gap-4 px-6 py-8"
                 style={{
                   background: t.cardBg,
                   border: `1px solid ${t.cardBorder}`,
@@ -191,17 +190,21 @@ const Hero = () => {
                   backfaceVisibility: 'hidden',
                 }}
               >
-                <div className="w-28 h-28 rounded-full p-0.5 flex-shrink-0"
-                  style={{ background: 'linear-gradient(135deg,#6366f1,#c084fc,#f472b6)', animation: 'spinring 8s linear infinite' }}>
-                  <div className="w-full h-full rounded-full flex items-center justify-center text-4xl transition-colors duration-300"
-                    style={{ background: t.avatarInner }}>
+                {/* Avatar ring */}
+                <div
+                  className="w-28 h-28 rounded-full p-0.5 flex-shrink-0"
+                  style={{ background: 'linear-gradient(135deg,#6366f1,#c084fc,#f472b6)', animation: 'spinring 8s linear infinite' }}
+                >
+                  <div
+                    className="w-full h-full rounded-full flex items-center justify-center text-4xl"
+                    style={{ background: t.avatarInner }}
+                  >
                     👨‍💻
                   </div>
                 </div>
 
                 <div className="text-center">
-                  <div className="font-bold text-lg transition-colors duration-300"
-                    style={{ fontFamily: "'Syne',sans-serif", color: isDarkMode ? '#ffffff' : '#1e1b4b' }}>
+                  <div className="font-bold text-lg" style={{ fontFamily: "'Syne',sans-serif", color: isDarkMode ? '#ffffff' : '#1e1b4b' }}>
                     Gypsy Danger
                   </div>
                   <div className="text-xs tracking-widest uppercase mt-1" style={{ color: isDarkMode ? '#c084fc' : '#7c3aed' }}>
@@ -211,19 +214,22 @@ const Hero = () => {
 
                 <div className="flex gap-1.5 flex-wrap justify-center">
                   {['React', 'TypeScript', 'Node.js'].map((tag) => (
-                    <span key={tag} className="text-xs px-2.5 py-0.5 rounded-full transition-colors duration-300"
+                    <span
+                      key={tag}
+                      className="text-xs px-2.5 py-0.5 rounded-full"
                       style={{
-                        border: `1px solid ${isDarkMode ? 'rgba(99,102,241,0.3)' : 'rgba(99,102,241,0.25)'}`,
+                        border:     `1px solid ${isDarkMode ? 'rgba(99,102,241,0.3)' : 'rgba(99,102,241,0.25)'}`,
                         background: isDarkMode ? 'rgba(99,102,241,0.08)' : 'rgba(99,102,241,0.07)',
-                        color: isDarkMode ? '#a5b4fc' : '#4338ca',
-                      }}>
+                        color:      isDarkMode ? '#a5b4fc' : '#4338ca',
+                      }}
+                    >
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* 3D edges */}
+              {/* 3D depth edges */}
               <div className="absolute rounded-r-lg" style={{
                 right: -14, top: 20, bottom: 20, width: 14,
                 background: t.edgeRight,
@@ -240,15 +246,17 @@ const Hero = () => {
             </div>
 
             {/* Floating chips */}
-            {chips.map(({ label, icon, cls, iconBg, delay, dot }) => (
-              <div key={label}
-                className={`absolute flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium whitespace-nowrap ${cls} transition-colors duration-300`}
+            {chips.map(({ label, icon, style, iconBg, delay, dot }) => (
+              <div
+                key={label}
+                className="absolute flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium whitespace-nowrap"
                 style={{
+                  ...style,
                   background: t.chipBg,
-                  border: `1px solid ${t.chipBorder}`,
-                  color: t.chipText,
-                  boxShadow: isDarkMode ? '0 20px 40px rgba(0,0,0,0.4)' : '0 8px 24px rgba(99,102,241,0.12)',
-                  animation: `chipfloat 5s ease-in-out infinite ${delay}`,
+                  border:     `1px solid ${t.chipBorder}`,
+                  color:      t.chipText,
+                  boxShadow:  isDarkMode ? '0 20px 40px rgba(0,0,0,0.4)' : '0 8px 24px rgba(99,102,241,0.12)',
+                  animation:  `chipfloat 5s ease-in-out infinite ${delay}`,
                 }}
               >
                 {dot
@@ -259,6 +267,7 @@ const Hero = () => {
               </div>
             ))}
           </div>
+
         </div>
       </div>
 

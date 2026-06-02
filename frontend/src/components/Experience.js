@@ -83,6 +83,7 @@ const Card = ({ exp, flip }) => (
     className="group relative rounded-3xl p-8 cursor-pointer transition-all duration-300"
     style={{
       background: "rgba(15,23,42,0.9)",
+      backdropFilter: "blur(20px)",
       border: "1px solid rgba(99,102,241,0.15)",
       transformStyle: "preserve-3d",
       perspective: 800,
@@ -167,20 +168,14 @@ const Card = ({ exp, flip }) => (
 
 const Experience = () => (
   <section
-    id="experience"
-    className="py-20 overflow-hidden relative"
-    style={{ background: "#060912", fontFamily: "'DM Sans', sans-serif" }}
-  >
-    {/* Grid bg */}
-    <div
-      className="absolute inset-0"
-      style={{
-        backgroundImage:
-          "linear-gradient(rgba(99,102,241,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.05) 1px, transparent 1px)",
-        backgroundSize: "60px 60px",
-        maskImage: "radial-gradient(ellipse 100% 80% at 50% 50%, black 30%, transparent 100%)",
-      }}
-    />
+  id="experience"
+  className="py-20 overflow-hidden relative"
+  style={{
+    background: "transparent",
+    fontFamily: "'DM Sans', sans-serif"
+  }}
+>
+    
 
     <div className="container mx-auto px-6 relative z-10">
       {/* Header */}
@@ -218,7 +213,11 @@ const Experience = () => (
           <div
             key={s.label}
             className="text-center rounded-2xl p-5 transition-transform duration-300 hover:-translate-y-1"
-            style={{ background: "rgba(15,23,42,0.8)", border: "1px solid rgba(99,102,241,0.15)" }}
+            style={{
+  background: "rgba(15,23,42,0.45)",
+  backdropFilter: "blur(20px)",
+  border: "1px solid rgba(99,102,241,0.15)"
+}}
           >
             <div
               className="font-extrabold text-3xl"

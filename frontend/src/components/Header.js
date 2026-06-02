@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
 const mainNavItems = [
-  { name: 'Home',     href: '#home'     },
-  { name: 'About',    href: '#about'    },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Contact',  href: '#contact'  },
-  
+  { name: 'Home',       href: '#home' },
+  { name: 'About',      href: '#about' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Skills',     href: '#skills' },
+  { name: 'Projects',   href: '#projects' },
+  { name: 'Contact',    href: '#contact' },
 ];
 
 const secondaryNavItems = [
-  { name: 'Experience',     href: '#experience',     icon: '💼' },
-  { name: 'Skills',         href: '#skills',         icon: '⚡' },
   { name: 'Education',      href: '#education',      icon: '🎓' },
   { name: 'Certifications', href: '#certifications', icon: '📜' },
   { name: 'Volunteering',   href: '#volunteering',   icon: '🤝' },
   { name: 'Achievements',   href: '#achievements',   icon: '🏆' },
 ];
-
-const dropDividerAfter = ['Skills', 'Certifications'];
+const dropDividerAfter = ['Certifications'];
 
 const ChevronDown = () => (
   <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -49,8 +47,9 @@ const Header = () => {
       }}
     >
       <div style={{
-        maxWidth: 1100, margin: '0 auto', padding: '0 32px',
+        maxWidth: 1200, margin: '0 auto', padding: '0 32px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24,
+        
       }}>
 
         {/* Logo */}
@@ -82,7 +81,7 @@ const Header = () => {
               href={item.href}
               onClick={() => setActiveItem(item.name)}
               style={{
-                fontSize: 13, fontWeight: 500, padding: '7px 16px',
+                fontSize: 13, fontWeight: 500, padding: '7px 13px',
                 borderRadius: 100, textDecoration: 'none',
                 transition: 'all 0.2s', whiteSpace: 'nowrap',
                 ...(activeItem === item.name

@@ -241,7 +241,7 @@ const Skills = () => {
     <section
       id="skills"
       style={{
-        background: t.sectionBg,
+        background: 'transparent',
         padding: '80px 0 72px',
         fontFamily: "'DM Sans', sans-serif",
         overflow: 'hidden',
@@ -249,17 +249,9 @@ const Skills = () => {
         transition: 'background 0.35s',
       }}
     >
-      {/* Grid bg */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        backgroundImage: `linear-gradient(${t.gridLine} 1px,transparent 1px),linear-gradient(90deg,${t.gridLine} 1px,transparent 1px)`,
-        backgroundSize: '60px 60px',
-        maskImage: 'radial-gradient(ellipse 100% 70% at 50% 50%,black 20%,transparent 100%)',
-      }} />
+      
 
-      {/* Ambient glows */}
-      <div style={{ position: 'absolute', borderRadius: '50%', filter: 'blur(100px)', pointerEvents: 'none', width: 400, height: 400, top: -100, right: -80, background: t.glow1, transition: 'background 0.35s' }} />
-      <div style={{ position: 'absolute', borderRadius: '50%', filter: 'blur(100px)', pointerEvents: 'none', width: 340, height: 340, bottom: -80, left: -60, background: t.glow2, transition: 'background 0.35s' }} />
+      
 
       {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: 56, position: 'relative', zIndex: 1, padding: '0 32px' }}>

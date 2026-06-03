@@ -288,7 +288,7 @@ const Projects = () => {
     <section
       id="projects"
       style={{
-        background: t.sectionBg,
+        background: 'transparent',
         padding: '80px 32px',
         fontFamily: "'DM Sans', sans-serif",
         overflow: 'hidden',
@@ -296,13 +296,7 @@ const Projects = () => {
         transition: 'background 0.35s',
       }}
     >
-      {/* Grid bg */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        backgroundImage: `linear-gradient(${t.gridLine} 1px,transparent 1px),linear-gradient(90deg,${t.gridLine} 1px,transparent 1px)`,
-        backgroundSize: '60px 60px',
-        maskImage: 'radial-gradient(ellipse 100% 80% at 50% 50%,black 30%,transparent 100%)',
-      }} />
+      
 
       <div style={{ position: 'relative', zIndex: 1 }}>
         {/* Header */}

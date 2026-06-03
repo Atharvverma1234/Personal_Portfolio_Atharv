@@ -204,18 +204,14 @@ const Achievements = () => {
     <section
       id="achievements"
       style={{
-        background: t.sectionBg,
+        background: 'transparent',
         padding: '80px 32px',
         fontFamily: "'DM Sans', sans-serif",
         overflow: 'hidden', position: 'relative',
         transition: 'background 0.35s',
       }}
     >
-      {/* Grid bg */}
-      <div style={{ position:'absolute', inset:0, backgroundImage:`linear-gradient(${t.gridLine} 1px,transparent 1px),linear-gradient(90deg,${t.gridLine} 1px,transparent 1px)`, backgroundSize:'60px 60px', maskImage:'radial-gradient(ellipse 100% 80% at 50% 50%,black 30%,transparent 100%)' }} />
-      <div style={{ position:'absolute', borderRadius:'50%', filter:'blur(110px)', pointerEvents:'none', width:380, height:380, top:-80, left:-60, background:t.glow1, transition:'background 0.35s' }} />
-      <div style={{ position:'absolute', borderRadius:'50%', filter:'blur(110px)', pointerEvents:'none', width:320, height:320, bottom:-60, right:-40, background:t.glow2, transition:'background 0.35s' }} />
-
+      
       {/* Header */}
       <div style={{ textAlign:'center', marginBottom:56, position:'relative', zIndex:1 }}>
         <span style={{ display:'inline-flex', alignItems:'center', gap:8, fontSize:12, fontWeight:500, padding:'5px 14px', borderRadius:100, background:t.tagBg, border:`1px solid ${t.tagBorder}`, color:t.tagText, letterSpacing:'0.08em', textTransform:'uppercase', marginBottom:16, transition:'all 0.3s' }}>

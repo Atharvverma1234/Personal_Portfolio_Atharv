@@ -97,7 +97,7 @@ const Footer = () => {
   return (
     <footer
       style={{
-        background: t.footerBg,
+        background:'transparent',
         padding: '64px 32px 32px',
         fontFamily: "'DM Sans', sans-serif",
         position: 'relative',
@@ -106,12 +106,7 @@ const Footer = () => {
         transition: 'background 0.35s',
       }}
     >
-      {/* Grid bg */}
-      <div style={{ position:'absolute', inset:0, backgroundImage:`linear-gradient(${t.gridLine} 1px,transparent 1px),linear-gradient(90deg,${t.gridLine} 1px,transparent 1px)`, backgroundSize:'60px 60px', maskImage:'radial-gradient(ellipse 100% 60% at 50% 0%,black 20%,transparent 100%)' }} />
-      {/* Glows */}
-      <div style={{ position:'absolute', borderRadius:'50%', filter:'blur(110px)', pointerEvents:'none', width:300, height:300, top:-100, left:-60, background:t.glow1, transition:'background 0.35s' }} />
-      <div style={{ position:'absolute', borderRadius:'50%', filter:'blur(110px)', pointerEvents:'none', width:260, height:260, top:-80, right:-40, background:t.glow2, transition:'background 0.35s' }} />
-
+      
       {/* ── Top grid ── */}
       <div style={{ display:'grid', gridTemplateColumns:'1.4fr 1fr 1fr', gap:48, maxWidth:1040, margin:'0 auto 48px', position:'relative', zIndex:1 }}>
 

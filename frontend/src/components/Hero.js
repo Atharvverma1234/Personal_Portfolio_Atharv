@@ -117,7 +117,7 @@ const Hero = () => {
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
               }}>
-                Gypsy Danger
+                Atharv Verma
               </span>
             </h1>
 

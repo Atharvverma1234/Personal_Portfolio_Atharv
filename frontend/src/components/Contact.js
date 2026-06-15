@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
+import emailjs from '@emailjs/browser';
+
+const EMAILJS_SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
 
 const contactInfo = [
   { icon: '📧', title: 'Email',    value: 'atharvverma2905@gmail.com', link: 'mailto:atharvverma2905@gmail.com' },
@@ -152,23 +157,34 @@ const Contact = () => {
     e.target.style.background  = t.inputBg;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
-      setResult({ ok: false, text: 'Please fill in all required fields.' });
-      return;
-    }
-    setSubmitting(true);
-    try {
-      await new Promise((r) => setTimeout(r, 1200));
-      setResult({ ok: true, text: "✓ Message sent! I'll get back to you within 24 hours." });
-      setForm({ name:'', email:'', subject:'', message:'' });
-    } catch {
-      setResult({ ok: false, text: 'Something went wrong. Please try again.' });
-    } finally {
-      setSubmitting(false);
-    }
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!form.name || !form.email || !form.message) {
+    setResult({ ok: false, text: 'Please fill in all required fields.' });
+    return;
+  }
+  setSubmitting(true);
+  try {
+    await emailjs.send(
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      {
+        from_name:  form.name,
+        from_email: form.email,
+        subject:    form.subject || 'No subject',
+        message:    form.message,
+      },
+      EMAILJS_PUBLIC_KEY
+    );
+    setResult({ ok: true, text: "✓ Message sent! I'll get back to you within 24 hours." });
+    setForm({ name: '', email: '', subject: '', message: '' });
+  } catch (err) {
+    console.error(err);
+    setResult({ ok: false, text: 'Something went wrong. Please try again.' });
+  } finally {
+    setSubmitting(false);
+  }
+};
 
   const sharedPanel = {
     borderRadius: 24, padding: 32,

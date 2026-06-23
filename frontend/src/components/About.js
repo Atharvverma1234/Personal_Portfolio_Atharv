@@ -4,7 +4,7 @@ import { useTheme } from "../context/ThemeContext";
 
 const stats = [
   { value: "3+",   label: "Years experience"   },
-  { value: "50+",  label: "Projects completed"  },
+  { value: "15+",  label: "Projects completed"  },
   { value: "100%", label: "Client satisfaction" },
   { value: "24/7", label: "Availability"        },
 ];
@@ -354,6 +354,7 @@ const About = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
+              onClick={() => window.open("/Atharv_Verma_Resume.pdf", "_blank")}
               style={{
                 background:"linear-gradient(135deg,#6366f1,#8b5cf6)",
                 color:"#fff", border:"none",
@@ -369,6 +370,7 @@ const About = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
+              onClick={() => window.open("#skills", "_self")}
               style={{
                 background:"transparent",
                 color:t.btnOText,

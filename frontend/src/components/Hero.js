@@ -205,10 +205,10 @@ const Hero = () => {
 
                 <div className="text-center">
                   <div className="font-bold text-lg" style={{ fontFamily: "'Syne',sans-serif", color: isDarkMode ? '#ffffff' : '#1e1b4b' }}>
-                    Gypsy Danger
+                    Atharv Verma
                   </div>
                   <div className="text-xs tracking-widest uppercase mt-1" style={{ color: isDarkMode ? '#c084fc' : '#7c3aed' }}>
-                    Kaiju Killer
+                    Full Stack Developer
                   </div>
                 </div>
 

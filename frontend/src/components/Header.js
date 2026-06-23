@@ -162,7 +162,8 @@ const Header = () => {
           </div>
 
           {/* CV button */}
-          <button className="hidden md:block" style={{
+          <button className="hidden md:block" 
+           onClick={() => window.open('/Atharv_Verma_Resume.pdf', '_blank')}style={{
             fontSize: 13, fontWeight: 500, padding: '9px 22px',
             borderRadius: 100,
             background: 'linear-gradient(135deg,#6366f1,#8b5cf6)',
@@ -221,12 +222,15 @@ const Header = () => {
               >{item.icon} {item.name}</a>
             ))}
           </div>
-          <button style={{
+          <button 
+           onClick={() => window.open('/Atharv_Verma_Resume.pdf', '_blank')}
+           style={{
             width: '100%', marginTop: 14, padding: 12, borderRadius: 12,
             background: 'linear-gradient(135deg,#6366f1,#8b5cf6)',
             color: '#fff', border: 'none', fontSize: 14, fontWeight: 500,
             cursor: 'pointer', fontFamily: "'DM Sans', sans-serif",
             boxShadow: '0 0 20px rgba(99,102,241,0.30)',
+            href: '../../public/profile.jpeg', 
           }}>Download CV</button>
         </div>
       )}

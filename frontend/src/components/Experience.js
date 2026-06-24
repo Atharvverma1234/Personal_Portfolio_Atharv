@@ -80,7 +80,7 @@ const stats = [
 
 const Card = ({ exp, flip }) => (
   <div
-    className="group relative rounded-3xl p-8 cursor-pointer transition-all duration-300"
+    className="group relative rounded-2xl sm:rounded-3xl p-5 sm:p-8 cursor-pointer transition-all duration-300"
     style={{
       background: "rgba(15,23,42,0.9)",
       backdropFilter: "blur(20px)",
@@ -89,6 +89,8 @@ const Card = ({ exp, flip }) => (
       perspective: 800,
     }}
     onMouseEnter={(e) => {
+      // 3D tilt is a hover-only enhancement; touch devices simply won't
+      // trigger mouseenter, so this never interferes with mobile scrolling.
       e.currentTarget.style.transform = flip
         ? "perspective(800px) rotateY(8deg) rotateX(3deg) translateZ(12px) scale(1.02)"
         : "perspective(800px) rotateY(-8deg) rotateX(3deg) translateZ(12px) scale(1.02)";
@@ -101,9 +103,9 @@ const Card = ({ exp, flip }) => (
       e.currentTarget.style.boxShadow = "";
     }}
   >
-    {/* 3D depth edge */}
+    {/* 3D depth edge — desktop only, hidden on mobile since cards stack full-width there */}
     <div
-      className="absolute top-4 bottom-4 w-3 rounded-r-lg pointer-events-none"
+      className="hidden md:block absolute top-4 bottom-4 w-3 rounded-r-lg pointer-events-none"
       style={{
         [flip ? "left" : "right"]: -12,
         background: flip
@@ -114,7 +116,7 @@ const Card = ({ exp, flip }) => (
     />
 
     <span
-      className="inline-flex items-center text-sm font-medium px-3 py-1.5 rounded-full mb-4 tracking-wide"
+      className="inline-flex items-center text-xs sm:text-sm font-medium px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full mb-3 sm:mb-4 tracking-wide"
       style={
         exp.current
           ? { background: "rgba(34,197,94,0.12)", color: "#4ade80", border: "1px solid rgba(34,197,94,0.2)" }
@@ -124,35 +126,35 @@ const Card = ({ exp, flip }) => (
       {exp.year}
     </span>
 
-    <div className="font-bold text-white text-lg mb-1.5" style={{ fontFamily: "'Syne', sans-serif" }}>
+    <div className="font-bold text-white text-base sm:text-lg mb-1.5" style={{ fontFamily: "'Syne', sans-serif" }}>
       {exp.role}
     </div>
-    <div className="text-sm mb-1.5">
+    <div className="flex flex-wrap items-center gap-x-1.5 text-xs sm:text-sm mb-1.5">
       <span style={{ color: "#818cf8" }}>{exp.company}</span>
-      <span style={{ color: "#334155", margin: "0 6px" }}>·</span>
+      <span style={{ color: "#334155" }} className="hidden sm:inline">·</span>
       <span style={{ color: "#475569" }}>{exp.location}</span>
     </div>
 
-    <p className="text-sm leading-relaxed mb-4" style={{ color: "#94a3b8" }}>
+    <p className="text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4" style={{ color: "#94a3b8" }}>
       {exp.description}
     </p>
 
-    <p className="text-xs font-medium tracking-widest uppercase mb-2.5" style={{ color: "#64748b" }}>Key achievements</p>
-    <ul className="mb-5 space-y-2">
+    <p className="text-[11px] sm:text-xs font-medium tracking-widest uppercase mb-2 sm:mb-2.5" style={{ color: "#64748b" }}>Key achievements</p>
+    <ul className="mb-4 sm:mb-5 space-y-1.5 sm:space-y-2">
       {exp.achievements.map((a, i) => (
-        <li key={i} className="flex items-start gap-2.5 text-sm leading-relaxed" style={{ color: "#94a3b8" }}>
-          <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 flex-shrink-0 mt-2" />
+        <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm leading-relaxed" style={{ color: "#94a3b8" }}>
+          <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 flex-shrink-0 mt-1.5 sm:mt-2" />
           {a}
         </li>
       ))}
     </ul>
 
-    <p className="text-xs font-medium tracking-widest uppercase mb-2.5" style={{ color: "#64748b" }}>Technologies</p>
-    <div className="flex flex-wrap gap-2">
+    <p className="text-[11px] sm:text-xs font-medium tracking-widest uppercase mb-2 sm:mb-2.5" style={{ color: "#64748b" }}>Technologies</p>
+    <div className="flex flex-wrap gap-1.5 sm:gap-2">
       {exp.skills.map((s) => (
         <span
           key={s}
-          className="text-xs px-3 py-1 rounded-full"
+          className="text-[11px] sm:text-xs px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full"
           style={{
             background: "rgba(99,102,241,0.08)",
             border: "1px solid rgba(99,102,241,0.2)",
@@ -168,27 +170,25 @@ const Card = ({ exp, flip }) => (
 
 const Experience = () => (
   <section
-  id="experience"
-  className="py-20 overflow-hidden relative"
-  style={{
-    background: "transparent",
-    fontFamily: "'DM Sans', sans-serif"
-  }}
->
-    
-
-    <div className="container mx-auto px-6 relative z-10">
+    id="experience"
+    className="py-14 sm:py-20 overflow-hidden relative"
+    style={{
+      background: "transparent",
+      fontFamily: "'DM Sans', sans-serif"
+    }}
+  >
+    <div className="container mx-auto px-4 sm:px-6 relative z-10">
       {/* Header */}
-      <div className="text-center mb-16">
+      <div className="text-center mb-10 sm:mb-16">
         <span
-          className="inline-flex items-center gap-2 text-xs font-medium px-4 py-1.5 rounded-full mb-5 tracking-widest uppercase"
+          className="inline-flex items-center gap-2 text-xs font-medium px-3.5 sm:px-4 py-1.5 rounded-full mb-4 sm:mb-5 tracking-widest uppercase"
           style={{ background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)", color: "#a5b4fc" }}
         >
           Experience
         </span>
         <h2
           className="font-extrabold leading-tight tracking-tight"
-          style={{ fontFamily: "'Syne', sans-serif", fontSize: "clamp(36px,5vw,54px)", color: "#fff" }}
+          style={{ fontFamily: "'Syne', sans-serif", fontSize: "clamp(30px,8vw,54px)", color: "#fff" }}
         >
           Career{" "}
           <span
@@ -202,25 +202,25 @@ const Experience = () => (
             Journey
           </span>
         </h2>
-        <p className="mt-3 text-sm" style={{ color: "#64748b" }}>
+        <p className="mt-3 text-xs sm:text-sm px-4" style={{ color: "#64748b" }}>
           Professional timeline and key accomplishments
         </p>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-20">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto mb-14 sm:mb-20">
         {stats.map((s) => (
           <div
             key={s.label}
-            className="text-center rounded-2xl p-5 transition-transform duration-300 hover:-translate-y-1"
+            className="text-center rounded-xl sm:rounded-2xl p-3.5 sm:p-5 transition-transform duration-300 hover:-translate-y-1"
             style={{
-  background: "rgba(15,23,42,0.45)",
-  backdropFilter: "blur(20px)",
-  border: "1px solid rgba(99,102,241,0.15)"
-}}
+              background: "rgba(15,23,42,0.45)",
+              backdropFilter: "blur(20px)",
+              border: "1px solid rgba(99,102,241,0.15)"
+            }}
           >
             <div
-              className="font-extrabold text-3xl"
+              className="font-extrabold text-2xl sm:text-3xl"
               style={{
                 fontFamily: "'Syne', sans-serif",
                 background: "linear-gradient(135deg,#818cf8,#c084fc)",
@@ -231,7 +231,7 @@ const Experience = () => (
             >
               {s.value}
             </div>
-            <div className="text-xs mt-1 tracking-wide" style={{ color: "#64748b" }}>
+            <div className="text-[11px] sm:text-xs mt-1 tracking-wide" style={{ color: "#64748b" }}>
               {s.label}
             </div>
           </div>
@@ -240,9 +240,14 @@ const Experience = () => (
 
       {/* Timeline */}
       <div className="max-w-6xl mx-auto relative">
-        {/* Spine */}
+        {/* Spine — desktop only. On mobile we use a simpler left-aligned line instead */}
         <div
           className="absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 hidden md:block rounded-full"
+          style={{ background: "linear-gradient(to bottom, #6366f1, #8b5cf6, #d946ef)" }}
+        />
+        {/* Mobile spine, sits behind the icon column */}
+        <div
+          className="absolute left-[19px] top-2 bottom-2 w-0.5 md:hidden rounded-full"
           style={{ background: "linear-gradient(to bottom, #6366f1, #8b5cf6, #d946ef)" }}
         />
 
@@ -251,14 +256,14 @@ const Experience = () => (
           return (
             <div
               key={exp.id}
-              className="relative grid md:grid-cols-[1fr_60px_1fr] items-start mb-12 last:mb-0"
+              className="relative grid md:grid-cols-[1fr_60px_1fr] items-start mb-8 sm:mb-12 last:mb-0"
             >
-              {/* Left slot */}
-              <div className={`md:pr-7 ${isLeft ? "" : "opacity-0 pointer-events-none hidden md:block"}`}>
+              {/* Desktop left slot — only ever renders on md+ */}
+              <div className={`hidden md:block md:pr-7 ${isLeft ? "" : "opacity-0 pointer-events-none"}`}>
                 {isLeft && <Card exp={exp} flip={true} />}
               </div>
 
-              {/* Node */}
+              {/* Desktop node — only ever renders on md+ */}
               <div className="hidden md:flex justify-center pt-5">
                 <div
                   className="w-11 h-11 rounded-full flex items-center justify-center text-lg z-10 relative transition-transform duration-300 hover:scale-110"
@@ -272,14 +277,28 @@ const Experience = () => (
                 </div>
               </div>
 
-              {/* Right slot */}
-              <div className={`md:pl-7 ${isLeft ? "opacity-0 pointer-events-none hidden md:block" : ""}`}>
+              {/* Desktop right slot — only ever renders on md+ */}
+              <div className={`hidden md:block md:pl-7 ${isLeft ? "opacity-0 pointer-events-none" : ""}`}>
                 {!isLeft && <Card exp={exp} flip={false} />}
               </div>
 
-              {/* Mobile — always show */}
-              <div className="md:hidden col-span-3">
-                <Card exp={exp} flip={false} />
+              {/* Mobile layout — small icon node + card side by side, single column */}
+              <div className="md:hidden flex gap-3">
+                <div className="flex-shrink-0 pt-0.5">
+                  <div
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-base relative z-10"
+                    style={{
+                      background: "#0f172a",
+                      border: "2px solid rgba(99,102,241,0.4)",
+                      boxShadow: "0 0 0 4px rgba(99,102,241,0.06)",
+                    }}
+                  >
+                    {exp.icon}
+                  </div>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <Card exp={exp} flip={false} />
+                </div>
               </div>
             </div>
           );

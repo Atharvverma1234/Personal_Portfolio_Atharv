@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
 
 const stats = [
-  { value: "3+",   label: "Years experience"   },
+  { value: "2+",   label: "Years experience"   },
   { value: "15+",  label: "Projects completed"  },
   { value: "100%", label: "Client satisfaction" },
   { value: "24/7", label: "Availability"        },
@@ -247,7 +247,7 @@ const About = () => {
                 <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between" }}>
                   <div>
                     <div style={{ fontFamily:"'Syne',sans-serif", fontSize:15, fontWeight:700, color:t.nameColor, transition:"color 0.35s" }}>
-                      Gypsy Danger
+                      Atharv Verma
                     </div>
                     <div style={{ fontSize:12, color:t.roleColor, letterSpacing:"0.06em", textTransform:"uppercase", transition:"color 0.35s" }}>
                       Full Stack Dev

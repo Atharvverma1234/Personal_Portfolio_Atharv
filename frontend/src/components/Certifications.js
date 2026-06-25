@@ -5,27 +5,257 @@ import { useTheme } from '../context/ThemeContext';
    Add more certs to this array — the grid and filters update automatically.
 ───────────────────────────────────────────────────────────────── */
 const ALL_CERTS = [
-  { id:1,  title:'AWS Certified Solutions Architect', issuer:'Amazon Web Services', date:'Jun 2023', cat:'cloud',    icon:'☁️',  credId:'AWS-1234', link:'#', skills:['Cloud Architecture','EC2','S3','Load Balancing','IAM'] },
-  { id:2,  title:'AWS Certified Developer – Associate', issuer:'Amazon Web Services', date:'Sep 2023', cat:'cloud',  icon:'☁️',  credId:'AWS-5678', link:'#', skills:['Lambda','API Gateway','DynamoDB','CloudFormation'] },
-  { id:3,  title:'MongoDB Certified Developer', issuer:'MongoDB University', date:'Apr 2023', cat:'data',           icon:'🍃', credId:'MDB-001',  link:'#', skills:['Database Design','NoSQL','Aggregation','Indexing'] },
-  { id:4,  title:'React Developer Certification', issuer:'Meta', date:'Mar 2023', cat:'frontend',                   icon:'⚛️', credId:'META-456', link:'#', skills:['React','Hooks','Context API','Performance'] },
-  { id:5,  title:'Node.js Certified Developer', issuer:'OpenJS Foundation', date:'Feb 2023', cat:'backend',         icon:'🟢', credId:'OJS-789',  link:'#', skills:['Backend','REST API','Streams','Async Patterns'] },
-  { id:6,  title:'Google Cloud Associate', issuer:'Google Cloud', date:'Nov 2023', cat:'cloud',                     icon:'🔵', credId:'GCP-321',  link:'#', skills:['GKE','BigQuery','Cloud Run','Pub/Sub'] },
-  { id:7,  title:'Kubernetes Application Developer', issuer:'CNCF', date:'Jan 2024', cat:'cloud',                   icon:'⚙️', credId:'CKAD-001', link:'#', skills:['Pods','Deployments','Services','ConfigMaps'] },
-  { id:8,  title:'Certified Ethical Hacker', issuer:'EC-Council', date:'Jul 2023', cat:'security',                  icon:'🛡️', credId:'CEH-999',  link:'#', skills:['Penetration Testing','Vulnerability Assessment','Network Security'] },
-  { id:9,  title:'TensorFlow Developer Certificate', issuer:'Google', date:'Oct 2023', cat:'data',                  icon:'🧠', credId:'TF-555',   link:'#', skills:['Deep Learning','CNNs','NLP','Model Deployment'] },
-  { id:10, title:'Certified Kubernetes Administrator', issuer:'CNCF', date:'Dec 2023', cat:'cloud',                 icon:'⚙️', credId:'CKA-002',  link:'#', skills:['Cluster Setup','Networking','Storage','Security'] },
-  { id:11, title:'TypeScript Certification', issuer:'Microsoft', date:'Aug 2023', cat:'frontend',                   icon:'🔷', credId:'MS-TS-1',  link:'#', skills:['TypeScript','Generics','Decorators','Type Inference'] },
+  {
+    id: 1,
+    title: 'Google AI Essentials',
+    issuer: 'Coursera',
+    date: 'Jun 2026',
+    cat: 'ai',
+    icon: '🤖',
+    credId: 'GAI-001',
+    link: '#',
+    skills: ['Artificial Intelligence', 'Generative AI', 'Prompting', 'Machine Learning', 'AI Ethics']
+  },
+
+  {
+    id: 2,
+    title: 'Google Prompting Essentials',
+    issuer: 'Coursera',
+    date: 'Jun 2026',
+    cat: 'ai',
+    icon: '💬',
+    credId: 'GPE-002',
+    link: '#',
+    skills: ['Prompt Engineering', 'LLMs', 'AI Tools', 'Content Generation', 'Problem Solving']
+  },
+
+  {
+    id: 3,
+    title: 'Introduction to Industry 4.0 and Industrial Internet of Things',
+    issuer: 'NPTEL',
+    date: 'May 2026',
+    cat: 'iot',
+    icon: '🏭',
+    credId: 'NPTEL-IOT-003',
+    link: '#',
+    skills: ['Industry 4.0', 'Industrial IoT', 'Automation', 'Smart Manufacturing', 'Cyber-Physical Systems']
+  },
+
+  {
+    id: 4,
+    title: 'AWS Certification',
+    issuer: 'Dayananda Sagar College of Engineering',
+    date: 'Oct 2025',
+    cat: 'cloud',
+    icon: '☁️',
+    credId: 'AWS-5678',
+    link: '#',
+    skills: ['AWS Cloud', 'EC2', 'S3', 'IAM', 'Cloud Computing']
+  },
+
+  {
+    id: 5,
+    title: 'Energy Literacy Training',
+    issuer: 'Energy Swaraj Foundation',
+    date: 'Jun 2024',
+    cat: 'productivity',
+    icon: '🌱',
+    credId: 'ELT-005',
+    link: '#',
+    skills: ['Renewable Energy', 'Solar Energy', 'Energy Conservation', 'Sustainability', 'Climate Awareness']
+  },
+
+  {
+    id: 6,
+    title: 'Gemini Certified University Student',
+    issuer: 'Google',
+    date: 'Nov 2025',
+    cat: 'ai',
+    icon: '✨',
+    credId: 'GEM-US-006',
+    link: '#',
+    skills: ['Gemini AI', 'Generative AI', 'Prompt Engineering', 'AI Productivity', 'Google AI Tools']
+  },
+
+  {
+    id: 7,
+    title: 'Gemini Certified Educator',
+    issuer: 'Google',
+    date: 'Nov 2025',
+    cat: 'ai',
+    icon: '🎓',
+    credId: 'GEM-ED-007',
+    link: '#',
+    skills: ['AI in Education', 'Gemini AI', 'Content Creation', 'Learning Tools', 'Digital Education']
+  },
+
+  {
+    id: 8,
+    title: 'Deloitte Australia - Data Analytics Job Simulation',
+    issuer: 'Forage',
+    date: 'Mar 2025',
+    cat: 'data',
+    icon: '📊',
+    credId: 'DEL-008',
+    link: '#',
+    skills: ['Data Analytics', 'Excel', 'Data Visualization', 'Business Insights', 'Data Interpretation']
+  },
+
+  {
+    id: 9,
+    title: 'Skyscanner - Front-End Software Engineering Job Simulation',
+    issuer: 'Forage',
+    date: 'Mar 2025',
+    cat: 'programming',
+    icon: '⚛️',
+    credId: 'SKY-009',
+    link: '#',
+    skills: ['Frontend Development', 'JavaScript', 'React', 'UI Design', 'Web Development']
+  },
+
+  {
+    id: 10,
+    title: 'Goldman Sachs - Software Engineering Job Simulation',
+    issuer: 'Forage',
+    date: 'Feb 2025',
+    cat: 'programming',
+    icon: '🛡️',
+    credId: 'GS-010',
+    link: '#',
+    skills: ['Cybersecurity', 'Password Security', 'Risk Assessment', 'Authentication', 'Security Practices']
+  },
+
+  {
+    id: 11,
+    title: 'C Programming Course',
+    issuer: 'Infosys Springboard',
+    date: 'Dec 2023',
+    cat: 'programming',
+    icon: '💻',
+    credId: 'C-011',
+    link: '#',
+    skills: ['C Programming', 'Data Structures', 'Pointers', 'Memory Management', 'Problem Solving']
+  },
+
+  {
+    id: 12,
+    title: 'C++ Course: Learn the Essentials',
+    issuer: 'Scaler',
+    date: 'Jun 2024',
+    cat: 'programming',
+    icon: '⚙️',
+    credId: 'CPP-012',
+    link: '#',
+    skills: ['C++', 'OOP', 'STL', 'Algorithms', 'Problem Solving']
+  },
+
+  {
+    id: 13,
+    title: 'Getting Started with Microsoft Excel',
+    issuer: 'Coursera',
+    date: 'Mar 2024',
+    cat: 'data',
+    icon: '📈',
+    credId: 'EXCEL-013',
+    link: '#',
+    skills: ['Microsoft Excel', 'Spreadsheets', 'Data Analysis', 'Formulas', 'Data Management']
+  }
 ];
 
-const FILTERS = ['All', 'Cloud', 'Frontend', 'Backend', 'Data', 'Security'];
+const FILTERS = [
+  'All',
+  'AI',
+  'Programming',
+  'Cloud',
+  'Data',
+  'IoT',
+  'Productivity'
+];
 
 const catMeta = {
-  cloud:    { label: 'Cloud',    dark: { bg:'rgba(59,130,246,0.12)',  text:'#93c5fd', ibg:'rgba(59,130,246,0.10)'  }, light: { bg:'rgba(59,130,246,0.10)',  text:'#1d4ed8', ibg:'rgba(59,130,246,0.08)'  } },
-  frontend: { label: 'Frontend', dark: { bg:'rgba(34,197,94,0.12)',   text:'#86efac', ibg:'rgba(34,197,94,0.10)'   }, light: { bg:'rgba(34,197,94,0.10)',   text:'#15803d', ibg:'rgba(34,197,94,0.08)'   } },
-  backend:  { label: 'Backend',  dark: { bg:'rgba(251,191,36,0.12)',  text:'#fcd34d', ibg:'rgba(251,191,36,0.10)'  }, light: { bg:'rgba(251,191,36,0.10)',  text:'#b45309', ibg:'rgba(251,191,36,0.08)'  } },
-  data:     { label: 'Data',     dark: { bg:'rgba(239,68,68,0.12)',   text:'#fca5a5', ibg:'rgba(239,68,68,0.10)'   }, light: { bg:'rgba(239,68,68,0.10)',   text:'#b91c1c', ibg:'rgba(239,68,68,0.08)'   } },
-  security: { label: 'Security', dark: { bg:'rgba(168,85,247,0.14)',  text:'#d8b4fe', ibg:'rgba(139,92,246,0.10)'  }, light: { bg:'rgba(168,85,247,0.10)',  text:'#7c3aed', ibg:'rgba(139,92,246,0.08)'  } },
+  ai: {
+    label: 'AI',
+    dark: {
+      bg: 'rgba(168,85,247,0.14)',
+      text: '#d8b4fe',
+      ibg: 'rgba(168,85,247,0.10)'
+    },
+    light: {
+      bg: 'rgba(168,85,247,0.10)',
+      text: '#7c3aed',
+      ibg: 'rgba(168,85,247,0.08)'
+    }
+  },
+
+  programming: {
+    label: 'Programming',
+    dark: {
+      bg: 'rgba(34,197,94,0.12)',
+      text: '#86efac',
+      ibg: 'rgba(34,197,94,0.10)'
+    },
+    light: {
+      bg: 'rgba(34,197,94,0.10)',
+      text: '#15803d',
+      ibg: 'rgba(34,197,94,0.08)'
+    }
+  },
+
+  cloud: {
+    label: 'Cloud',
+    dark: {
+      bg: 'rgba(59,130,246,0.12)',
+      text: '#93c5fd',
+      ibg: 'rgba(59,130,246,0.10)'
+    },
+    light: {
+      bg: 'rgba(59,130,246,0.10)',
+      text: '#1d4ed8',
+      ibg: 'rgba(59,130,246,0.08)'
+    }
+  },
+
+  data: {
+    label: 'Data',
+    dark: {
+      bg: 'rgba(239,68,68,0.12)',
+      text: '#fca5a5',
+      ibg: 'rgba(239,68,68,0.10)'
+    },
+    light: {
+      bg: 'rgba(239,68,68,0.10)',
+      text: '#b91c1c',
+      ibg: 'rgba(239,68,68,0.08)'
+    }
+  },
+
+  iot: {
+    label: 'IoT',
+    dark: {
+      bg: 'rgba(251,191,36,0.12)',
+      text: '#fcd34d',
+      ibg: 'rgba(251,191,36,0.10)'
+    },
+    light: {
+      bg: 'rgba(251,191,36,0.10)',
+      text: '#b45309',
+      ibg: 'rgba(251,191,36,0.08)'
+    }
+  },
+
+  productivity: {
+    label: 'Productivity',
+    dark: {
+      bg: 'rgba(20,184,166,0.12)',
+      text: '#5eead4',
+      ibg: 'rgba(20,184,166,0.10)'
+    },
+    light: {
+      bg: 'rgba(20,184,166,0.10)',
+      text: '#0f766e',
+      ibg: 'rgba(20,184,166,0.08)'
+    }
+  }
 };
 
 /* ── theme tokens ── */

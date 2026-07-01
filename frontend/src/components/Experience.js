@@ -15,7 +15,7 @@ const experiences = [
       "Collaborated with maintainers through pull requests, code reviews, and feedback-driven development.",
     ],
     skills: ["React", "Node.js", "TypeScript", "MySQL", "JSON"],
-    icon: "🔍",
+    icon: "🌐",
     current: true,
   },
   {
@@ -32,7 +32,7 @@ const experiences = [
       "Implemented comprehensive testing",
     ],
     skills: ["TypeScript", "React", "Node.js", "CSS", "HTML"],
-    icon: "🪟",
+    icon: "💻",
     current: false,
   },
   {
@@ -49,7 +49,7 @@ const experiences = [
       "Documented API endpoints, setup procedures, and testing workflows for seamless project deployment.",
     ],
     skills: ["Express.js", "Node.js", "MongoDB", "REST API", "Git"],
-    icon: "📦",
+    icon: "🖥️",
     current: false,
   },
   {
@@ -66,7 +66,7 @@ const experiences = [
       "Collaborated with maintainers and fellow contributors to enhance project functionality and user experience.",
     ],
     skills: ["Next.js", "React", "Node.js", "MongoDB", "Tailwind"],
-    icon: "💼",
+    icon: "🛠️",
     current: false,
   },
 ];

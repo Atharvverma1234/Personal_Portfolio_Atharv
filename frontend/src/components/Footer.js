@@ -11,10 +11,10 @@ const quickLinks = [
 ];
 
 const socials = [
-  { label: 'Gh', name: 'GitHub',    href: 'https://github.com'    },
-  { label: 'in', name: 'LinkedIn',  href: 'https://linkedin.com'  },
-  { label: '𝕏',  name: 'Twitter',   href: 'https://twitter.com'   },
-  { label: 'ig', name: 'Instagram', href: 'https://instagram.com' },
+  { label: 'Gh', name: 'GitHub',    href: 'https://github.com/Atharvverma1234'    },
+  { label: 'in', name: 'LinkedIn',  href: 'https://www.linkedin.com/in/atharv-verma/'  },
+  { label: '𝕏',  name: 'Twitter',   href: 'https://x.com/AtharvVerma2905'   },
+  { label: 'ig', name: 'Instagram', href: 'https://instagram.com/atharvverma2905' },
 ];
 
 /* ── theme tokens ── */
@@ -113,11 +113,11 @@ const Footer = () => {
         {/* Brand */}
         <div>
           <a href="#home" style={{ display:'flex', alignItems:'center', gap:8, textDecoration:'none', marginBottom:14 }}>
-            <div style={{ width:34, height:34, borderRadius:10, background:'linear-gradient(135deg,#6366f1,#8b5cf6)', display:'flex', alignItems:'center', justifyContent:'center', fontFamily:"'Syne',sans-serif", fontSize:16, fontWeight:800, color:'#fff' }}>
-              G
+            <div style={{ width:40, height:34, borderRadius:10, background:'linear-gradient(135deg,#6366f1,#8b5cf6)', display:'flex', alignItems:'center', justifyContent:'center', fontFamily:"'Syne',sans-serif", fontSize:16, fontWeight:800, color:'#fff' }}>
+              AV
             </div>
             <span style={{ fontFamily:"'Syne',sans-serif", fontSize:18, fontWeight:800, background:'linear-gradient(135deg,#818cf8,#c084fc)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>
-              Gypsy Danger
+              Atharv Verma
             </span>
           </a>
           <p style={{ fontSize:13, color:t.bio, lineHeight:1.7, marginBottom:20, maxWidth:280, transition:'color 0.3s' }}>
@@ -214,7 +214,7 @@ const Footer = () => {
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:12, maxWidth:1040, margin:'0 auto', position:'relative', zIndex:1 }}>
         <p style={{ fontSize:12, color:t.copy, transition:'color 0.3s' }}>
           © {year}{' '}
-          <span style={{ color:t.copyAccent }}>Gypsy Danger</span>
+          <span style={{ color:t.copyAccent }}>Atharv Verma</span>
           . All rights reserved.
         </p>
         <div style={{ display:'flex', gap:20 }}>
@@ -236,7 +236,7 @@ const Footer = () => {
       <p style={{ fontSize:11, color:t.made, textAlign:'center', marginTop:20, position:'relative', zIndex:1, transition:'color 0.3s' }}>
         Crafted with{' '}
         <span style={{ color:t.madeAccent }}>♥</span>
-        {' '}using React & Tailwind CSS
+        {' '} and lots of tea.
       </p>
 
       {/* Back to top */}

@@ -13,13 +13,13 @@ const row1 = [
 ];
 
 const row2 = [
-  { name: 'GraphQL',    icon: '📊', cat: 'Backend',   iconBg: 'rgba(236,72,153,0.12)'  },
+  { name: 'MySQL',    icon: '📊', cat: 'Backend',   iconBg: 'rgba(236,72,153,0.12)'  },
   { name: 'PostgreSQL', icon: '🐘', cat: 'Backend',   iconBg: 'rgba(56,189,248,0.15)'  },
   { name: 'Git',        icon: '📚', cat: 'Tools',     iconBg: 'rgba(251,146,60,0.12)'  },
   { name: 'Docker',     icon: '🐳', cat: 'Tools',     iconBg: 'rgba(56,189,248,0.15)'  },
   { name: 'AWS',        icon: '☁️', cat: 'Tools',     iconBg: 'rgba(251,191,36,0.12)'  },
   { name: 'Figma',      icon: '🎯', cat: 'Design',    iconBg: 'rgba(168,85,247,0.15)'  },
-  { name: 'Jest',       icon: '🧪', cat: 'Testing',   iconBg: 'rgba(234,179,8,0.12)'   },
+  { name: 'Postman',    icon: '🧪', cat: 'Testing',   iconBg: 'rgba(234,179,8,0.12)'   },
   { name: 'Redux',      icon: '🔁', cat: 'Frontend',  iconBg: 'rgba(99,102,241,0.15)'  },
 ];
 

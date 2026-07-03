@@ -13,10 +13,10 @@ const contactInfo = [
 ];
 
 const socials = [
-  { label: 'Gh', name: 'GitHub',    href: '#' },
-  { label: 'in', name: 'LinkedIn',  href: '#' },
-  { label: '𝕏',  name: 'Twitter',   href: '#' },
-  { label: 'ig', name: 'Instagram', href: '#' },
+  { label: 'Gh', name: 'GitHub',    href: 'https://github.com/Atharvverma1234' },
+  { label: 'in', name: 'LinkedIn',  href: 'https://www.linkedin.com/in/atharv-verma/' },
+  { label: '𝕏',  name: 'Twitter',   href: 'https://x.com/AtharvVerma2905' },
+  { label: 'ig', name: 'Instagram', href: 'https://instagram.com/atharvverma2905' },
 ];
 
 /* ── theme tokens ── */

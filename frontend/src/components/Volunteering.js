@@ -237,9 +237,9 @@ const Volunteering = () => {
           Volunteering
         </span>
         <h2 style={{ fontFamily:"'Syne',sans-serif", fontSize:'clamp(32px,4.5vw,50px)', fontWeight:800, color:t.heading, letterSpacing:'-.02em', lineHeight:1.1, transition:'color 0.35s' }}>
-          Community{' '}
+          Leadership &{' '}
           <span style={{ background:'linear-gradient(135deg,#818cf8,#c084fc,#f472b6)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>
-            Service
+            Volunteering
           </span>
         </h2>
         <p style={{ fontSize:15, color:t.sub, marginTop:10, transition:'color 0.3s' }}>

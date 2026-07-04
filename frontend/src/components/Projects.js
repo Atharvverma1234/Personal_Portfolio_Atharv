@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 
 const projects = [
@@ -120,11 +120,12 @@ const light = {
   viewBtnText:   '#475569',
 };
 
-const ProjectCard = ({ project, index, t, isDarkMode }) => {
+const ProjectCard = ({ project, index, t, isDarkMode, isTouch }) => {
   const cardRef = useRef(null);
   const flipY = index % 2 !== 0;
 
   const handleMouseMove = (e) => {
+    if (isTouch) return;
     const card = cardRef.current;
     if (!card) return;
     const r = card.getBoundingClientRect();
@@ -150,6 +151,7 @@ const ProjectCard = ({ project, index, t, isDarkMode }) => {
     <div style={{ perspective: 900 }}>
       <div
         ref={cardRef}
+        className="project-card"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={{
@@ -165,8 +167,7 @@ const ProjectCard = ({ project, index, t, isDarkMode }) => {
         }}
       >
         {/* Banner */}
-        <div style={{
-          height: 160,
+        <div className="project-banner" style={{
           background: isDarkMode ? project.bannerDark : project.bannerLight,
           position: 'relative',
           display: 'flex',
@@ -174,7 +175,7 @@ const ProjectCard = ({ project, index, t, isDarkMode }) => {
           justifyContent: 'center',
           overflow: 'hidden',
         }}>
-          <span style={{ fontSize: 56, opacity: isDarkMode ? 0.18 : 0.25 }}>{project.icon}</span>
+          <span className="project-banner-icon" style={{ opacity: isDarkMode ? 0.18 : 0.25 }}>{project.icon}</span>
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg,rgba(255,255,255,0.04) 0%,transparent 60%)' }} />
           {/* Accent dot */}
           <div style={{
@@ -196,7 +197,7 @@ const ProjectCard = ({ project, index, t, isDarkMode }) => {
         </div>
 
         {/* Body */}
-        <div style={{ padding: 24 }}>
+        <div className="project-body">
           <h3 style={{
             fontFamily: "'Syne', sans-serif",
             fontSize: 17, fontWeight: 700,
@@ -225,7 +226,7 @@ const ProjectCard = ({ project, index, t, isDarkMode }) => {
           </div>
 
           {/* Buttons */}
-          <div style={{ display: 'flex', gap: 10 }}>
+          <div className="project-buttons" style={{ display: 'flex', gap: 10 }}>
             <a
               href={project.github}
               style={{
@@ -265,7 +266,7 @@ const ProjectCard = ({ project, index, t, isDarkMode }) => {
         </div>
 
         {/* 3D depth edge */}
-        <div style={{
+        <div className="project-card-edge" style={{
           position: 'absolute',
           [flipY ? 'left' : 'right']: -13,
           top: 16, bottom: 16, width: 13,
@@ -283,24 +284,30 @@ const ProjectCard = ({ project, index, t, isDarkMode }) => {
 const Projects = () => {
   const { isDarkMode } = useTheme();
   const t = isDarkMode ? dark : light;
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsTouch(window.matchMedia('(hover: none), (max-width: 768px)').matches);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   return (
     <section
       id="projects"
+      className="projects-section"
       style={{
         background: 'transparent',
-        padding: '80px 32px',
         fontFamily: "'DM Sans', sans-serif",
         overflow: 'hidden',
         position: 'relative',
         transition: 'background 0.35s',
       }}
     >
-      
-
       <div style={{ position: 'relative', zIndex: 1 }}>
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: 56 }}>
+        <div className="projects-header" style={{ textAlign: 'center' }}>
           <span style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
             fontSize: 12, fontWeight: 500, padding: '5px 14px',
@@ -313,7 +320,7 @@ const Projects = () => {
           </span>
           <h2 style={{
             fontFamily: "'Syne', sans-serif",
-            fontSize: 'clamp(32px,4.5vw,50px)',
+            fontSize: 'clamp(30px,7vw,50px)',
             fontWeight: 800,
             color: t.heading,
             letterSpacing: '-0.02em',
@@ -336,11 +343,8 @@ const Projects = () => {
         </div>
 
         {/* Grid */}
-        <div style={{
+        <div className="projects-grid" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
-          gap: 28,
-          maxWidth: 980,
           margin: '0 auto',
         }}>
           {projects.map((project, index) => (
@@ -350,6 +354,7 @@ const Projects = () => {
               index={index}
               t={t}
               isDarkMode={isDarkMode}
+              isTouch={isTouch}
             />
           ))}
         </div>
@@ -378,6 +383,71 @@ const Projects = () => {
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
+
+        .projects-section {
+          padding: 80px 32px;
+        }
+
+        .projects-header {
+          margin-bottom: 56px;
+        }
+
+        .projects-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 28px;
+          max-width: 980px;
+        }
+
+        .project-banner {
+          height: 160px;
+        }
+
+        .project-banner-icon {
+          font-size: 56px;
+        }
+
+        .project-body {
+          padding: 24px;
+        }
+
+        .project-card-edge {
+          display: block;
+        }
+
+        /* ── Tablet ─────────────────────────────────────────── */
+        @media (max-width: 860px) {
+          .projects-section { padding: 64px 24px; }
+          .projects-header { margin-bottom: 44px; }
+          .projects-grid {
+            grid-template-columns: 1fr;
+            gap: 24px;
+            max-width: 480px;
+          }
+        }
+
+        /* ── Mobile ─────────────────────────────────────────── */
+        @media (max-width: 480px) {
+          .projects-section { padding: 48px 16px; }
+          .projects-header { margin-bottom: 36px; }
+
+          .project-banner { height: 130px; }
+          .project-banner-icon { font-size: 44px; }
+          .project-body { padding: 18px; }
+
+          .project-buttons {
+            flex-direction: column;
+          }
+
+          /* Hide the 3D depth edge — the negative offset causes
+             horizontal overflow at narrow widths */
+          .project-card-edge {
+            display: none;
+          }
+
+          .project-card {
+            transform: none !important;
+          }
+        }
       `}</style>
     </section>
   );

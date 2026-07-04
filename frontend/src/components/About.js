@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
 
@@ -81,6 +81,7 @@ const light = {
 /* ─── Stat card with 3D tilt ───────────────────────────────────── */
 const StatCard = ({ value, label, t }) => (
   <motion.div
+    className="about-stat-card"
     whileHover={{
       rotateX: 8, rotateY: -6,
       z: 8, scale: 1.04,
@@ -99,9 +100,9 @@ const StatCard = ({ value, label, t }) => (
       transition: "background 0.3s, border-color 0.3s",
     }}
   >
-    <div style={{
+    <div className="about-stat-value" style={{
       fontFamily: "'Syne', sans-serif",
-      fontSize: 24, fontWeight: 800,
+      fontWeight: 800,
       background: "linear-gradient(135deg,#818cf8,#c084fc)",
       WebkitBackgroundClip: "text",
       WebkitTextFillColor: "transparent",
@@ -109,15 +110,16 @@ const StatCard = ({ value, label, t }) => (
     }}>
       {value}
     </div>
-    <div style={{ fontSize: 11, color: t.statLabel, marginTop: 4, letterSpacing: "0.04em" }}>
+    <div className="about-stat-label" style={{ color: t.statLabel, marginTop: 4, letterSpacing: "0.04em" }}>
       {label}
     </div>
   </motion.div>
 );
 
 /* ─── Floating badge ───────────────────────────────────────────── */
-const FloatBadge = ({ style, delay = 0, children, t }) => (
+const FloatBadge = ({ className, style, delay = 0, children, t }) => (
   <motion.div
+    className={`about-float-badge ${className || ""}`}
     animate={{ y: [0, -8, 0] }}
     transition={{ repeat: Infinity, duration: 5, delay, ease: "easeInOut" }}
     style={{
@@ -128,7 +130,7 @@ const FloatBadge = ({ style, delay = 0, children, t }) => (
       background: t.badgeBg,
       boxShadow: "0 16px 32px rgba(0,0,0,0.4)",
       display: "flex", alignItems: "center", gap: 8,
-      fontSize: 13, fontWeight: 500, color: t.badgeText,
+      fontWeight: 500, color: t.badgeText,
       whiteSpace: "nowrap",
       backdropFilter: "blur(8px)",
       transition: "background 0.3s, border-color 0.3s, color 0.3s",
@@ -145,11 +147,20 @@ const About = () => {
   const t = isDarkMode ? dark : light;
   const cardWrapRef = useRef(null);
   const sceneRef = useRef(null);
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    // Disable mouse-tilt on touch devices / narrow screens
+    const check = () => setIsTouch(window.matchMedia("(hover: none), (max-width: 768px)").matches);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     const scene = sceneRef.current;
     const card = cardWrapRef.current;
-    if (!scene || !card) return;
+    if (!scene || !card || isTouch) return;
 
     const onMove = (e) => {
       const r = scene.getBoundingClientRect();
@@ -169,34 +180,32 @@ const About = () => {
       scene.removeEventListener("mousemove", onMove);
       scene.removeEventListener("mouseleave", onLeave);
     };
-  }, []);
+  }, [isTouch]);
 
   return (
     <section
-  id="about"
-  style={{
-    background: "transparent",
-    fontFamily: "'DM Sans', sans-serif",
-    padding: "72px 32px",
-    overflow: "hidden",
-    position: "relative",
-  }}
->
-      
-
-      
-      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:56, alignItems:"center", maxWidth:1040, margin:"0 auto", position:"relative", zIndex:1 }}>
+      id="about"
+      className="about-section"
+      style={{
+        background: "transparent",
+        fontFamily: "'DM Sans', sans-serif",
+        overflow: "hidden",
+        position: "relative",
+      }}
+    >
+      <div className="about-grid" style={{ maxWidth: 1040, margin: "0 auto", position: "relative", zIndex: 1 }}>
 
         {/* ── LEFT: 3D card ────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, rotateY: -20, y: 40 }}
           whileInView={{ opacity: 1, rotateY: 0, y: 0 }}
           transition={{ duration: 0.8 }}
-          style={{ display:"flex", alignItems:"center", justifyContent:"center" }}
+          style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
         >
           <div
             ref={sceneRef}
-            style={{ perspective: 1000, width: 300, height: 400, position: "relative", cursor: "pointer" }}
+            className="about-card-scene"
+            style={{ perspective: 1000, position: "relative", cursor: isTouch ? "default" : "pointer" }}
           >
             {/* Glow ring */}
             <motion.div
@@ -240,34 +249,34 @@ const About = () => {
                   position: "relative", overflow: "hidden",
                   transition: "background 0.35s",
                 }}>
-                  <img src="/profile.jpeg" alt="Profile" style={{ width:"100%", height:"100%", objectFit:"cover", borderRadius:18 }} />
+                  <img src="/profile.jpeg" alt="Profile" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 18 }} />
                 </div>
 
                 {/* Footer */}
-                <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <div>
-                    <div style={{ fontFamily:"'Syne',sans-serif", fontSize:15, fontWeight:700, color:t.nameColor, transition:"color 0.35s" }}>
+                    <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 15, fontWeight: 700, color: t.nameColor, transition: "color 0.35s" }}>
                       Atharv Verma
                     </div>
-                    <div style={{ fontSize:12, color:t.roleColor, letterSpacing:"0.06em", textTransform:"uppercase", transition:"color 0.35s" }}>
+                    <div style={{ fontSize: 12, color: t.roleColor, letterSpacing: "0.06em", textTransform: "uppercase", transition: "color 0.35s" }}>
                       Full Stack Dev
                     </div>
                   </div>
-                  <div style={{ display:"flex", alignItems:"center", gap:6 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                     <motion.div
                       animate={{ opacity: [1, 0.3, 1] }}
                       transition={{ repeat: Infinity, duration: 2 }}
-                      style={{ width:8, height:8, borderRadius:"50%", background:"#22c55e", boxShadow:"0 0 8px rgba(34,197,94,0.6)" }}
+                      style={{ width: 8, height: 8, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 8px rgba(34,197,94,0.6)" }}
                     />
-                    <span style={{ fontSize:12, color:"#4ade80" }}>Available</span>
+                    <span style={{ fontSize: 12, color: "#4ade80" }}>Available</span>
                   </div>
                 </div>
 
                 {/* Skill pills */}
-                <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>
+                <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                   {skills.map((s) => (
                     <span key={s} style={{
-                      fontSize:12, padding:"4px 12px", borderRadius:100,
+                      fontSize: 12, padding: "4px 12px", borderRadius: 100,
                       background: t.pillBg,
                       border: `1px solid ${t.pillBorder}`,
                       color: t.pillText,
@@ -279,25 +288,25 @@ const About = () => {
                 </div>
 
                 {/* 3D edges */}
-                <div style={{ position:"absolute", right:-16, top:20, bottom:20, width:16, borderRadius:"0 10px 10px 0", background:t.edgeRBg, borderRight:`1px solid ${isDarkMode?"rgba(99,102,241,0.1)":"rgba(99,102,241,0.12)"}`, transition:"background 0.35s" }} />
-                <div style={{ position:"absolute", bottom:-16, left:20, right:20, height:16, borderRadius:"0 0 10px 10px", background:t.edgeBBg, borderBottom:`1px solid ${isDarkMode?"rgba(99,102,241,0.1)":"rgba(99,102,241,0.12)"}`, transition:"background 0.35s" }} />
+                <div className="about-edge-r" style={{ position: "absolute", top: 20, bottom: 20, borderRadius: "0 10px 10px 0", background: t.edgeRBg, borderRight: `1px solid ${isDarkMode ? "rgba(99,102,241,0.1)" : "rgba(99,102,241,0.12)"}`, transition: "background 0.35s" }} />
+                <div className="about-edge-b" style={{ position: "absolute", left: 20, right: 20, borderRadius: "0 0 10px 10px", background: t.edgeBBg, borderBottom: `1px solid ${isDarkMode ? "rgba(99,102,241,0.1)" : "rgba(99,102,241,0.12)"}`, transition: "background 0.35s" }} />
               </div>
 
               {/* Floating badges */}
-              <FloatBadge t={t} delay={0} style={{ top:-24, right:-40 }}>
+              <FloatBadge t={t} delay={0} className="about-badge-years">
                 <div>
-                  <div style={{ fontFamily:"'Syne',sans-serif", fontSize:20, fontWeight:800, background:"linear-gradient(135deg,#818cf8,#c084fc)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text", lineHeight:1 }}>3+</div>
-                  <div style={{ fontSize:11, color:"#94a3b8", marginTop:1 }}>Years Exp</div>
+                  <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 20, fontWeight: 800, background: "linear-gradient(135deg,#818cf8,#c084fc)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", lineHeight: 1 }}>3+</div>
+                  <div style={{ fontSize: 11, color: "#94a3b8", marginTop: 1 }}>Years Exp</div>
                 </div>
               </FloatBadge>
 
-              <FloatBadge t={t} delay={1.2} style={{ bottom:30, left:-52 }}>
-                <span style={{ width:28, height:28, borderRadius:8, background:"rgba(99,102,241,0.15)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:16 }}>⚛️</span>
+              <FloatBadge t={t} delay={1.2} className="about-badge-react">
+                <span style={{ width: 28, height: 28, borderRadius: 8, background: "rgba(99,102,241,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16 }}>⚛️</span>
                 <span>React Dev</span>
               </FloatBadge>
 
-              <FloatBadge t={t} delay={0.6} style={{ top:"44%", right:-60 }}>
-                <span style={{ width:28, height:28, borderRadius:8, background:"rgba(34,197,94,0.12)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:16 }}>💼</span>
+              <FloatBadge t={t} delay={0.6} className="about-badge-hire">
+                <span style={{ width: 28, height: 28, borderRadius: 8, background: "rgba(34,197,94,0.12)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16 }}>💼</span>
                 <span>Open to hire</span>
               </FloatBadge>
 
@@ -310,58 +319,59 @@ const About = () => {
           initial={{ opacity: 0, x: 60 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          style={{ display:"flex", flexDirection:"column", gap:20 }}
+          className="about-bio"
+          style={{ display: "flex", flexDirection: "column", gap: 20 }}
         >
           <span style={{
-            display:"inline-flex", alignItems:"center", gap:8,
-            fontSize:12, fontWeight:500, padding:"5px 14px",
-            borderRadius:100, width:"fit-content",
-            background: t.tagBg, border:`1px solid ${t.tagBorder}`, color:t.tagText,
-            letterSpacing:"0.07em", textTransform:"uppercase",
-            transition:"all 0.35s",
+            display: "inline-flex", alignItems: "center", gap: 8,
+            fontSize: 12, fontWeight: 500, padding: "5px 14px",
+            borderRadius: 100, width: "fit-content",
+            background: t.tagBg, border: `1px solid ${t.tagBorder}`, color: t.tagText,
+            letterSpacing: "0.07em", textTransform: "uppercase",
+            transition: "all 0.35s",
           }}>
             About me
           </span>
 
           <h2 style={{
-            fontFamily:"'Syne',sans-serif",
-            fontSize:"clamp(34px,4.5vw,52px)",
-            fontWeight:800, color:t.heading,
-            lineHeight:1.05, letterSpacing:"-0.02em",
-            transition:"color 0.35s",
+            fontFamily: "'Syne',sans-serif",
+            fontSize: "clamp(30px,7vw,52px)",
+            fontWeight: 800, color: t.heading,
+            lineHeight: 1.05, letterSpacing: "-0.02em",
+            transition: "color 0.35s",
           }}>
             About{" "}
-            <span style={{ background:"linear-gradient(135deg,#818cf8,#c084fc,#f472b6)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
+            <span style={{ background: "linear-gradient(135deg,#818cf8,#c084fc,#f472b6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
               Me
             </span>
           </h2>
 
-          <p style={{ fontSize:15, color:t.body, lineHeight:1.75, maxWidth:440, transition:"color 0.35s" }}>
+          <p style={{ fontSize: 15, color: t.body, lineHeight: 1.75, maxWidth: 440, transition: "color 0.35s" }}>
             I'm a passionate Full Stack Developer focused on building immersive digital experiences with modern technologies. I love crafting visually stunning interfaces combined with scalable backend systems.
           </p>
 
-          <p style={{ fontSize:14, color:t.body2, lineHeight:1.75, maxWidth:440, transition:"color 0.35s" }}>
+          <p style={{ fontSize: 14, color: t.body2, lineHeight: 1.75, maxWidth: 440, transition: "color 0.35s" }}>
             From frontend animations to backend architecture, I enjoy transforming complex ideas into elegant products that users genuinely enjoy interacting with.
           </p>
 
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:10 }}>
+          <div className="about-stats-grid" style={{ display: "grid", gap: 10 }}>
             {stats.map((s) => (
               <StatCard key={s.label} value={s.value} label={s.label} t={t} />
             ))}
           </div>
 
-          <div style={{ display:"flex", gap:12, flexWrap:"wrap" }}>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "flex-start" }}>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => window.open("/Atharv_Verma_Resume.pdf", "_blank")}
               style={{
-                background:"linear-gradient(135deg,#6366f1,#8b5cf6)",
-                color:"#fff", border:"none",
-                padding:"12px 26px", borderRadius:100,
-                fontSize:14, fontWeight:500, cursor:"pointer",
-                fontFamily:"'DM Sans',sans-serif",
-                boxShadow:"0 0 24px rgba(99,102,241,0.35)",
+                background: "linear-gradient(135deg,#6366f1,#8b5cf6)",
+                color: "#fff", border: "none",
+                padding: "12px 26px", borderRadius: 100,
+                fontSize: 14, fontWeight: 500, cursor: "pointer",
+                fontFamily: "'DM Sans',sans-serif",
+                boxShadow: "0 0 24px rgba(99,102,241,0.35)",
               }}
             >
               Download CV
@@ -372,13 +382,13 @@ const About = () => {
               whileTap={{ scale: 0.97 }}
               onClick={() => window.open("#skills", "_self")}
               style={{
-                background:"transparent",
-                color:t.btnOText,
-                border:`1px solid ${t.btnOBorder}`,
-                padding:"12px 26px", borderRadius:100,
-                fontSize:14, fontWeight:500, cursor:"pointer",
-                fontFamily:"'DM Sans',sans-serif",
-                transition:"all 0.2s",
+                background: "transparent",
+                color: t.btnOText,
+                border: `1px solid ${t.btnOBorder}`,
+                padding: "12px 26px", borderRadius: 100,
+                fontSize: 14, fontWeight: 500, cursor: "pointer",
+                fontFamily: "'DM Sans',sans-serif",
+                transition: "all 0.2s",
               }}
             >
               View Skills
@@ -390,9 +400,89 @@ const About = () => {
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
+
         @keyframes aboutCardfloat {
           0%,100% { transform: rotateY(-12deg) rotateX(6deg) translateY(0); }
           50%      { transform: rotateY(-7deg)  rotateX(3deg) translateY(-14px); }
+        }
+
+        .about-section {
+          padding: 72px 32px;
+        }
+
+        .about-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 56px;
+          align-items: center;
+        }
+
+        .about-card-scene {
+          width: 300px;
+          height: 400px;
+        }
+
+        .about-edge-r {
+          right: -16px;
+          width: 16px;
+        }
+
+        .about-edge-b {
+          bottom: -16px;
+          height: 16px;
+        }
+
+        .about-badge-years { top: -24px; right: -40px; }
+        .about-badge-react { bottom: 30px; left: -52px; }
+        .about-badge-hire  { top: 44%; right: -60px; }
+
+        .about-float-badge {
+          font-size: 13px;
+        }
+
+        .about-stats-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+
+        .about-stat-value { font-size: 24px; }
+        .about-stat-label { font-size: 11px; }
+
+        /* ── Tablet ─────────────────────────────────────────── */
+        @media (max-width: 900px) {
+          .about-section { padding: 56px 24px; }
+          .about-grid {
+            grid-template-columns: 1fr;
+            gap: 64px;
+            max-width: 480px;
+          }
+          .about-bio { text-align: center; align-items: center; }
+          .about-bio p { max-width: 100% !important; }
+          .about-bio > div:last-child { justify-content: center !important; }
+        }
+
+        /* ── Mobile ─────────────────────────────────────────── */
+        @media (max-width: 480px) {
+          .about-section { padding: 48px 16px; }
+          .about-grid { gap: 48px; }
+
+          .about-card-scene {
+            width: min(260px, 78vw);
+            height: min(340px, 100vw);
+          }
+
+          /* Pull badges inward so they don't cause horizontal scroll */
+          .about-badge-years { top: -16px; right: -8px; }
+          .about-badge-react { bottom: 16px; left: -8px; }
+          .about-badge-hire  { display: none; }
+
+          .about-float-badge {
+            font-size: 11px;
+            padding: 7px 10px !important;
+          }
+
+          .about-stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
         }
       `}</style>
     </section>

@@ -294,15 +294,16 @@ const light = {
 };
 
 /* ── Cert card ── */
-const CertCard = ({ cert, t, isDarkMode, onClick }) => {
+const CertCard = ({ cert, t, isDarkMode, isTouch, onClick }) => {
   const m = catMeta[cert.cat];
   const mc = isDarkMode ? m.dark : m.light;
 
   return (
     <div
+      className="cert-card"
       onClick={() => onClick(cert)}
       style={{
-        borderRadius: 20, padding: '18px 16px',
+        borderRadius: 20,
         background: t.cardBg,
         border: `1px solid ${t.cardBorder}`,
         cursor: 'pointer',
@@ -310,39 +311,41 @@ const CertCard = ({ cert, t, isDarkMode, onClick }) => {
         boxShadow: isDarkMode ? 'none' : '0 1px 8px rgba(99,102,241,0.06)',
       }}
       onMouseEnter={(e) => {
+        if (isTouch) return;
         e.currentTarget.style.borderColor = t.cardHover;
         e.currentTarget.style.transform = 'translateY(-2px)';
         e.currentTarget.style.boxShadow = isDarkMode
           ? '0 8px 28px rgba(0,0,0,0.4)' : '0 6px 20px rgba(99,102,241,0.12)';
       }}
       onMouseLeave={(e) => {
+        if (isTouch) return;
         e.currentTarget.style.borderColor = t.cardBorder;
         e.currentTarget.style.transform = '';
         e.currentTarget.style.boxShadow = isDarkMode ? 'none' : '0 1px 8px rgba(99,102,241,0.06)';
       }}
     >
-      <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', marginBottom:12 }}>
-        <div style={{
-          width:36, height:36, borderRadius:10,
+      <div className="cert-card-top" style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between' }}>
+        <div className="cert-icon" style={{
+          borderRadius:10,
           background: mc.ibg,
-          display:'flex', alignItems:'center', justifyContent:'center', fontSize:18,
+          display:'flex', alignItems:'center', justifyContent:'center',
         }}>
           {cert.icon}
         </div>
-        <span style={{
-          fontSize:11, fontWeight:500, padding:'3px 8px', borderRadius:100,
+        <span className="cert-badge" style={{
+          fontWeight:500, borderRadius:100,
           background: mc.bg, color: mc.text,
         }}>
           {m.label}
         </span>
       </div>
-      <div style={{ fontSize:13, fontWeight:500, color:t.titleColor, lineHeight:1.4, marginBottom:4, transition:'color 0.3s' }}>
+      <div className="cert-title" style={{ fontWeight:500, color:t.titleColor, lineHeight:1.4, transition:'color 0.3s' }}>
         {cert.title}
       </div>
-      <div style={{ fontSize:12, color:t.issuerColor, marginBottom:8, transition:'color 0.3s' }}>
+      <div className="cert-issuer" style={{ color:t.issuerColor, transition:'color 0.3s' }}>
         {cert.issuer}
       </div>
-      <div style={{ fontSize:11, color:t.dateColor, display:'flex', alignItems:'center', gap:4, transition:'color 0.3s' }}>
+      <div className="cert-date" style={{ color:t.dateColor, display:'flex', alignItems:'center', gap:4, transition:'color 0.3s' }}>
         <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" strokeWidth={2}/><path d="M16 2v4M8 2v4M3 10h18" strokeWidth={2}/></svg>
         {cert.date}
       </div>
@@ -358,41 +361,43 @@ const Modal = ({ cert, t, isDarkMode, onClose }) => {
 
   return (
     <div
+      className="cert-modal-overlay"
       onClick={onClose}
       style={{
         position:'fixed', inset:0, background:'rgba(0,0,0,0.5)',
         display:'flex', alignItems:'center', justifyContent:'center',
-        zIndex:100, padding:16,
+        zIndex:100,
       }}
     >
       <div
+        className="cert-modal"
         onClick={(e) => e.stopPropagation()}
         style={{
           background: t.modalBg,
           border: `1px solid ${t.modalBorder}`,
-          borderRadius:24, padding:28,
-          width:'100%', maxWidth:420,
+          width:'100%',
           transition:'background 0.3s',
         }}
       >
         {/* Header */}
-        <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', gap:12, marginBottom:16 }}>
-          <div style={{ display:'flex', alignItems:'center', gap:12 }}>
-            <div style={{ width:44, height:44, borderRadius:14, background:mc.ibg, display:'flex', alignItems:'center', justifyContent:'center', fontSize:22, flexShrink:0 }}>
+        <div className="cert-modal-header" style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', gap:12 }}>
+          <div style={{ display:'flex', alignItems:'center', gap:12, minWidth:0 }}>
+            <div className="cert-modal-icon" style={{ borderRadius:14, background:mc.ibg, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
               {cert.icon}
             </div>
-            <div>
-              <div style={{ fontSize:15, fontWeight:500, color:t.modalTitle, lineHeight:1.35, marginBottom:3, transition:'color 0.3s' }}>
+            <div style={{ minWidth:0 }}>
+              <div className="cert-modal-title" style={{ fontWeight:500, color:t.modalTitle, lineHeight:1.35, transition:'color 0.3s' }}>
                 {cert.title}
               </div>
-              <div style={{ fontSize:13, color:t.modalMeta, transition:'color 0.3s' }}>{cert.issuer}</div>
+              <div className="cert-modal-issuer" style={{ color:t.modalMeta, transition:'color 0.3s' }}>{cert.issuer}</div>
             </div>
           </div>
           <button
+            className="cert-modal-close"
             onClick={onClose}
             style={{
               background:t.closeBg, border:`1px solid ${t.closeBorder}`,
-              borderRadius:10, width:30, height:30,
+              borderRadius:10,
               display:'flex', alignItems:'center', justifyContent:'center',
               cursor:'pointer', flexShrink:0,
               transition:'all 0.2s',
@@ -408,19 +413,19 @@ const Modal = ({ cert, t, isDarkMode, onClose }) => {
           { icon:'🏷️', text: m.label },
           { icon:'🪪', text: `ID: ${cert.credId}` },
         ].map(({ icon, text }) => (
-          <div key={text} style={{ display:'flex', gap:8, fontSize:13, color:t.modalMeta, marginBottom:8, alignItems:'center', transition:'color 0.3s' }}>
+          <div key={text} className="cert-modal-meta-row" style={{ display:'flex', gap:8, color:t.modalMeta, alignItems:'center', transition:'color 0.3s' }}>
             <span style={{ fontSize:14 }}>{icon}</span>{text}
           </div>
         ))}
 
         {/* Skills */}
-        <div style={{ fontSize:12, fontWeight:500, color:t.modalLabel, margin:'14px 0 8px', transition:'color 0.3s' }}>
+        <div className="cert-modal-label" style={{ fontWeight:500, color:t.modalLabel, transition:'color 0.3s' }}>
           Skills validated
         </div>
         <div style={{ display:'flex', flexWrap:'wrap', gap:6 }}>
           {cert.skills.map((s) => (
-            <span key={s} style={{
-              fontSize:12, padding:'3px 10px', borderRadius:100,
+            <span key={s} className="cert-modal-pill" style={{
+              borderRadius:100,
               background:t.pillBg, border:`1px solid ${t.pillBorder}`, color:t.pillText,
               transition:'all 0.3s',
             }}>
@@ -434,12 +439,13 @@ const Modal = ({ cert, t, isDarkMode, onClose }) => {
           href={cert.link}
           target="_blank"
           rel="noreferrer"
+          className="cert-modal-cta"
           style={{
             display:'flex', alignItems:'center', justifyContent:'center', gap:6,
-            width:'100%', marginTop:16, padding:'10px',
+            width:'100%',
             borderRadius:12, border:`1px solid ${t.btnBorder}`,
             background:t.btnBg, color:t.btnText,
-            fontSize:13, fontWeight:500, textDecoration:'none',
+            fontWeight:500, textDecoration:'none',
             transition:'all 0.2s',
           }}
         >
@@ -457,6 +463,9 @@ const Certifications = () => {
   const t = isDarkMode ? dark : light;
   const [activeFilter, setActiveFilter] = useState('All');
   const [selected, setSelected] = useState(null);
+  const [isTouch] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(hover: none), (max-width: 768px)').matches
+  );
 
   const filtered = useMemo(() => (
     activeFilter === 'All'
@@ -469,74 +478,75 @@ const Certifications = () => {
   return (
     <section
       id="certifications"
+      className="certs-section"
       style={{
         background: 'transparent',
-        padding: '80px 32px',
         fontFamily: "'DM Sans', sans-serif",
         overflow: 'hidden', position: 'relative',
         transition: 'background 0.35s',
       }}
     >
-      
-      <div style={{ maxWidth:1040, margin:'0 auto', position:'relative', zIndex:1 }}>
+
+      <div className="certs-container" style={{ maxWidth:1040, margin:'0 auto', position:'relative', zIndex:1 }}>
         {/* Header */}
-        <div style={{ textAlign:'center', marginBottom:48 }}>
-          <span style={{ display:'inline-flex', alignItems:'center', gap:8, fontSize:12, fontWeight:500, padding:'5px 14px', borderRadius:100, background:t.tagBg, border:`1px solid ${t.tagBorder}`, color:t.tagText, letterSpacing:'0.08em', textTransform:'uppercase', marginBottom:16 }}>
+        <div className="certs-header" style={{ textAlign:'center' }}>
+          <span className="certs-tag" style={{ display:'inline-flex', alignItems:'center', gap:8, fontWeight:500, borderRadius:100, background:t.tagBg, border:`1px solid ${t.tagBorder}`, color:t.tagText, letterSpacing:'0.08em', textTransform:'uppercase' }}>
             Certifications
           </span>
-          <h2 style={{ fontFamily:"'Syne',sans-serif", fontSize:'clamp(32px,4.5vw,50px)', fontWeight:800, color:t.heading, letterSpacing:'-.02em', lineHeight:1.1, transition:'color 0.35s' }}>
+          <h2 style={{ fontFamily:"'Syne',sans-serif", fontSize:'clamp(30px,7vw,50px)', fontWeight:800, color:t.heading, letterSpacing:'-.02em', lineHeight:1.1, transition:'color 0.35s' }}>
             Professional{' '}
             <span style={{ background:'linear-gradient(135deg,#818cf8,#c084fc,#f472b6)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>
               Certifications
             </span>
           </h2>
-          <p style={{ fontSize:15, color:t.sub, marginTop:10, transition:'color 0.3s' }}>
+          <p className="certs-sub" style={{ color:t.sub, transition:'color 0.3s' }}>
             Validated expertise through industry-recognised certifications
           </p>
         </div>
 
-        {/* Filter tabs */}
-        <div style={{ display:'flex', flexWrap:'wrap', gap:8, marginBottom:24 }}>
+        {/* Filter tabs — horizontally scrollable on small screens */}
+        <div className="certs-filters">
           {FILTERS.map((f) => {
             const isActive = activeFilter === f;
             return (
               <button
                 key={f}
+                className="certs-filter-btn"
                 onClick={() => setActiveFilter(f)}
                 style={{
-                  fontSize:13, padding:'6px 16px', borderRadius:100, border:`1px solid ${isActive ? t.filterActiveBorder : t.filterBorder}`,
+                  borderRadius:100, border:`1px solid ${isActive ? t.filterActiveBorder : t.filterBorder}`,
                   background: isActive ? t.filterActiveBg : t.filterBg,
                   color: isActive ? t.filterActiveText : t.filterText,
                   cursor:'pointer', fontFamily:"'DM Sans',sans-serif",
                   transition:'all 0.18s',
                 }}
               >
-                {f}{f === 'All' && <span style={{ marginLeft:5, fontSize:11 }}>({ALL_CERTS.length})</span>}
+                {f}{f === 'All' && <span style={{ marginLeft:5, fontSize:'0.85em' }}>({ALL_CERTS.length})</span>}
               </button>
             );
           })}
         </div>
 
         {/* Grid — auto-fill so adding more certs just works */}
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(190px, 1fr))', gap:14 }}>
+        <div className="certs-grid">
           {filtered.map((cert) => (
-            <CertCard key={cert.id} cert={cert} t={t} isDarkMode={isDarkMode} onClick={setSelected} />
+            <CertCard key={cert.id} cert={cert} t={t} isDarkMode={isDarkMode} isTouch={isTouch} onClick={setSelected} />
           ))}
         </div>
 
         {/* Stats */}
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:14, marginTop:32 }}>
+        <div className="certs-stats">
           {[
             { val: ALL_CERTS.length, lbl: 'Certifications' },
             { val: '100%',           lbl: 'Pass rate'      },
             { val: providers,        lbl: 'Providers'      },
             { val: '3',              lbl: 'Years active'   },
           ].map(({ val, lbl }) => (
-            <div key={lbl} style={{ borderRadius:18, padding:'18px 14px', textAlign:'center', background:t.statBg, border:`1px solid ${t.statBorder}`, transition:'background 0.3s' }}>
-              <div style={{ fontFamily:"'Syne',sans-serif", fontSize:26, fontWeight:800, background:'linear-gradient(135deg,#818cf8,#c084fc)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>
+            <div key={lbl} className="stat-card" style={{ textAlign:'center', background:t.statBg, border:`1px solid ${t.statBorder}`, transition:'background 0.3s' }}>
+              <div className="stat-val" style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, background:'linear-gradient(135deg,#818cf8,#c084fc)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>
                 {val}
               </div>
-              <div style={{ fontSize:12, color:t.statLbl, marginTop:4, transition:'color 0.3s' }}>{lbl}</div>
+              <div className="stat-lbl" style={{ color:t.statLbl, transition:'color 0.3s' }}>{lbl}</div>
             </div>
           ))}
         </div>
@@ -544,7 +554,102 @@ const Certifications = () => {
 
       <Modal cert={selected} t={t} isDarkMode={isDarkMode} onClose={() => setSelected(null)} />
 
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');`}</style>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
+
+        .certs-section { padding: 80px 32px; }
+
+        .certs-header { margin-bottom: 48px; }
+        .certs-tag { font-size: 12px; padding: 5px 14px; margin-bottom: 16px; }
+        .certs-sub { font-size: 15px; margin-top: 10px; }
+
+        .certs-filters { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; }
+        .certs-filter-btn { font-size:13px; padding:6px 16px; flex:0 0 auto; }
+
+        .certs-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(190px, 1fr)); gap:14px; }
+
+        .cert-card { padding: 18px 16px; }
+        .cert-card-top { margin-bottom: 12px; }
+        .cert-icon { width:36px; height:36px; font-size:18px; }
+        .cert-badge { font-size:11px; padding:3px 8px; }
+        .cert-title { font-size:13px; margin-bottom:4px; }
+        .cert-issuer { font-size:12px; margin-bottom:8px; }
+        .cert-date { font-size:11px; }
+
+        .certs-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:32px; }
+        .stat-card { border-radius:18px; padding:18px 14px; }
+        .stat-val { font-size:26px; }
+        .stat-lbl { font-size:12px; margin-top:4px; }
+
+        .cert-modal-overlay { padding:16px; }
+        .cert-modal { border-radius:24px; padding:28px; max-width:420px; max-height:calc(100vh - 32px); overflow-y:auto; }
+        .cert-modal-header { margin-bottom:16px; }
+        .cert-modal-icon { width:44px; height:44px; font-size:22px; }
+        .cert-modal-title { font-size:15px; margin-bottom:3px; }
+        .cert-modal-issuer { font-size:13px; }
+        .cert-modal-close { width:30px; height:30px; }
+        .cert-modal-meta-row { font-size:13px; margin-bottom:8px; }
+        .cert-modal-label { font-size:12px; margin:14px 0 8px; }
+        .cert-modal-pill { font-size:12px; padding:3px 10px; }
+        .cert-modal-cta { margin-top:16px; padding:10px; font-size:13px; }
+
+        /* Only apply hover lift on devices that actually support hover, so touch taps don't get stuck mid-animation */
+        @media (hover: hover) and (pointer: fine) {
+          .cert-card:hover { transform: translateY(-2px); }
+        }
+        .cert-card:active { transform: scale(0.98); }
+        .certs-filter-btn:active { transform: scale(0.96); }
+
+        @media (max-width: 900px) {
+          .certs-section { padding: 64px 24px; }
+          .certs-header { margin-bottom: 36px; }
+          .certs-grid { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 12px; }
+          .certs-stats { gap: 10px; }
+        }
+
+        @media (max-width: 640px) {
+          .certs-filters {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            margin-left: -16px; margin-right: -16px;
+            padding: 0 16px 4px;
+          }
+          .certs-filters::-webkit-scrollbar { display: none; }
+        }
+
+        @media (max-width: 480px) {
+          .certs-section { padding: 48px 16px; }
+          .certs-header { margin-bottom: 28px; }
+          .certs-tag { font-size: 11px; padding: 4px 12px; margin-bottom: 12px; }
+          .certs-sub { font-size: 13.5px; padding: 0 8px; }
+
+          .certs-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+          .cert-card { padding: 14px 12px; border-radius: 16px; }
+          .cert-card-top { margin-bottom: 10px; }
+          .cert-icon { width: 30px; height: 30px; font-size: 15px; border-radius: 8px; }
+          .cert-badge { font-size: 10px; padding: 2px 7px; }
+          .cert-title { font-size: 12.5px; }
+          .cert-issuer { font-size: 11px; }
+          .cert-date { font-size: 10.5px; }
+
+          .certs-stats { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 24px; }
+          .stat-card { padding: 14px 10px; border-radius: 14px; }
+          .stat-val { font-size: 22px; }
+          .stat-lbl { font-size: 11px; }
+
+          .cert-modal { padding: 20px; border-radius: 20px; }
+          .cert-modal-icon { width: 38px; height: 38px; font-size: 18px; border-radius: 12px; }
+          .cert-modal-title { font-size: 14px; }
+          .cert-modal-close { width: 28px; height: 28px; }
+          .cert-modal-cta { font-size: 12.5px; }
+        }
+
+        @media (max-width: 340px) {
+          .certs-grid { grid-template-columns: 1fr; }
+        }
+      `}</style>
     </section>
   );
 };

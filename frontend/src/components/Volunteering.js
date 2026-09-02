@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 
 const volunteerCards = [
@@ -117,10 +117,11 @@ const light = {
 };
 
 /* ── Card ── */
-const VolCard = ({ card, t, isDarkMode }) => {
+const VolCard = ({ card, t, isDarkMode, isTouch }) => {
   const ref = useRef(null);
 
   const onMove = (e) => {
+    if (isTouch) return;
     const el = ref.current; if (!el) return;
     const r = el.getBoundingClientRect();
     const dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
@@ -132,6 +133,7 @@ const VolCard = ({ card, t, isDarkMode }) => {
       : '0 8px 28px rgba(99,102,241,0.14)';
   };
   const onLeave = () => {
+    if (isTouch) return;
     const el = ref.current; if (!el) return;
     el.style.transform = '';
     el.style.borderColor = t.cardBorder;
@@ -141,10 +143,11 @@ const VolCard = ({ card, t, isDarkMode }) => {
   return (
     <div
       ref={ref}
+      className="vol-card"
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       style={{
-        borderRadius: 24, padding: 26,
+        borderRadius: 24,
         background: t.cardBg,
         border: `1px solid ${t.cardBorder}`,
         position: 'relative', overflow: 'hidden',
@@ -160,27 +163,27 @@ const VolCard = ({ card, t, isDarkMode }) => {
       <div style={{ position:'absolute', top:0, left:0, right:0, height:3, background:card.strip, borderRadius:'3px 3px 0 0' }} />
 
       {/* Icon */}
-      <div style={{
-        width:48, height:48, borderRadius:14, marginBottom:16, marginTop:8,
+      <div className="vol-icon" style={{
+        borderRadius:14,
         background: card.iconBg, border:`1px solid ${card.iconBorder}`,
-        display:'flex', alignItems:'center', justifyContent:'center', fontSize:22,
+        display:'flex', alignItems:'center', justifyContent:'center',
         transition:'background 0.3s',
       }}>
         {card.icon}
       </div>
 
       {/* Role */}
-      <div style={{ fontFamily:"'Syne',sans-serif", fontSize:15, fontWeight:700, color:t.roleColor, marginBottom:5, lineHeight:1.3, transition:'color 0.3s' }}>
+      <div className="vol-role" style={{ fontFamily:"'Syne',sans-serif", fontWeight:700, color:t.roleColor, lineHeight:1.3, transition:'color 0.3s' }}>
         {card.role}
       </div>
 
       {/* Organisation */}
-      <div style={{ fontSize:13, fontWeight:500, color:card.orgColor, marginBottom:10 }}>
+      <div className="vol-org" style={{ fontWeight:500, color:card.orgColor }}>
         {card.organization}
       </div>
 
       {/* Timeframe */}
-      <div style={{ fontSize:11, color:t.timeColor, display:'flex', alignItems:'center', gap:5, marginBottom:12, transition:'color 0.3s' }}>
+      <div className="vol-time" style={{ color:t.timeColor, display:'flex', alignItems:'center', gap:5, transition:'color 0.3s' }}>
         <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <rect x="3" y="4" width="18" height="18" rx="2" strokeWidth={2}/>
           <path d="M16 2v4M8 2v4M3 10h18" strokeWidth={2}/>
@@ -189,14 +192,14 @@ const VolCard = ({ card, t, isDarkMode }) => {
       </div>
 
       {/* Description */}
-      <p style={{ fontSize:13, color:t.descColor, lineHeight:1.65, transition:'color 0.3s' }}>
+      <p className="vol-desc" style={{ color:t.descColor, lineHeight:1.65, transition:'color 0.3s' }}>
         {card.description}
       </p>
 
       {/* Status badge */}
-      <div style={{
+      <div className="vol-status" style={{
         display:'inline-flex', alignItems:'center', gap:5,
-        fontSize:11, fontWeight:500, padding:'3px 10px', borderRadius:100, marginTop:14,
+        fontWeight:500, borderRadius:100,
         background:    card.active ? t.activeBg    : t.doneBg,
         border:       `1px solid ${card.active ? t.activeBorder : t.doneBorder}`,
         color:         card.active ? t.activeText   : t.doneText,
@@ -218,59 +221,61 @@ const VolCard = ({ card, t, isDarkMode }) => {
 const Volunteering = () => {
   const { isDarkMode } = useTheme();
   const t = isDarkMode ? dark : light;
+  const [isTouch] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(hover: none), (max-width: 768px)').matches
+  );
 
   return (
     <section
       id="volunteering"
+      className="vol-section"
       style={{
         background: 'transparent',
-        padding: '80px 32px',
         fontFamily: "'DM Sans', sans-serif",
         overflow: 'hidden', position: 'relative',
         transition: 'background 0.35s',
       }}
     >
-     
+
       {/* Header */}
-      <div style={{ textAlign:'center', marginBottom:56, position:'relative', zIndex:1 }}>
-        <span style={{ display:'inline-flex', alignItems:'center', gap:8, fontSize:12, fontWeight:500, padding:'5px 14px', borderRadius:100, background:t.tagBg, border:`1px solid ${t.tagBorder}`, color:t.tagText, letterSpacing:'0.08em', textTransform:'uppercase', marginBottom:16, transition:'all 0.3s' }}>
+      <div className="vol-header" style={{ textAlign:'center', position:'relative', zIndex:1 }}>
+        <span className="vol-tag" style={{ display:'inline-flex', alignItems:'center', gap:8, fontWeight:500, borderRadius:100, background:t.tagBg, border:`1px solid ${t.tagBorder}`, color:t.tagText, letterSpacing:'0.08em', textTransform:'uppercase', transition:'all 0.3s' }}>
           Volunteering
         </span>
-        <h2 style={{ fontFamily:"'Syne',sans-serif", fontSize:'clamp(32px,4.5vw,50px)', fontWeight:800, color:t.heading, letterSpacing:'-.02em', lineHeight:1.1, transition:'color 0.35s' }}>
+        <h2 className="vol-heading" style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, color:t.heading, letterSpacing:'-.02em', lineHeight:1.1, transition:'color 0.35s' }}>
           Leadership &{' '}
           <span style={{ background:'linear-gradient(135deg,#818cf8,#c084fc,#f472b6)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>
             Volunteering
           </span>
         </h2>
-        <p style={{ fontSize:15, color:t.sub, marginTop:10, transition:'color 0.3s' }}>
+        <p className="vol-sub" style={{ color:t.sub, transition:'color 0.3s' }}>
           Volunteer initiatives and social contributions
         </p>
       </div>
 
       {/* Cards grid */}
-      <div style={{
-        display:'grid', gridTemplateColumns:'repeat(4,1fr)',
-        gap:20, maxWidth:1040, margin:'0 auto', position:'relative', zIndex:1,
+      <div className="vol-grid" style={{
+        display:'grid', margin:'0 auto', position:'relative', zIndex:1,
       }}>
         {volunteerCards.map((card) => (
-          <VolCard key={card.id} card={card} t={t} isDarkMode={isDarkMode} />
+          <VolCard key={card.id} card={card} t={t} isDarkMode={isDarkMode} isTouch={isTouch} />
         ))}
       </div>
 
       {/* Summary stats */}
-      <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:24, flexWrap:'wrap', marginTop:48, position:'relative', zIndex:1 }}>
+      <div className="vol-stats" style={{ position:'relative', zIndex:1 }}>
         {stats.map((s, i) => (
           <React.Fragment key={s.lbl}>
-            <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:4 }}>
-              <div style={{ fontFamily:"'Syne',sans-serif", fontSize:28, fontWeight:800, background:'linear-gradient(135deg,#818cf8,#c084fc)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>
+            <div className="vol-stat-item" style={{ display:'flex', flexDirection:'column', alignItems:'center' }}>
+              <div className="vol-stat-val" style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, background:'linear-gradient(135deg,#818cf8,#c084fc)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>
                 {s.val}
               </div>
-              <div style={{ fontSize:12, color:t.statLbl, letterSpacing:'0.04em', transition:'color 0.3s' }}>
+              <div className="vol-stat-lbl" style={{ color:t.statLbl, letterSpacing:'0.04em', transition:'color 0.3s' }}>
                 {s.lbl}
               </div>
             </div>
             {i < stats.length - 1 && (
-              <div style={{ width:1, height:40, background:t.divColor, transition:'background 0.3s' }} />
+              <div className="vol-divider" style={{ background:t.divColor, transition:'background 0.3s' }} />
             )}
           </React.Fragment>
         ))}
@@ -279,8 +284,65 @@ const Volunteering = () => {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
         @keyframes activeDot { 0%,100%{opacity:1} 50%{opacity:.3} }
-        @media(max-width:700px){ .vol-grid { grid-template-columns: 1fr 1fr !important; } }
-        @media(max-width:440px){ .vol-grid { grid-template-columns: 1fr !important; } }
+
+        .vol-section { padding: 80px 32px; }
+
+        .vol-header { margin-bottom: 56px; }
+        .vol-tag { font-size: 12px; padding: 5px 14px; margin-bottom: 16px; }
+        .vol-heading { font-size: clamp(30px, 6vw, 50px); }
+        .vol-sub { font-size: 15px; margin-top: 10px; }
+
+        .vol-grid { grid-template-columns: repeat(4,1fr); gap: 20px; max-width: 1040px; }
+        .vol-card { padding: 26px; }
+        .vol-icon { width: 48px; height: 48px; font-size: 22px; margin-bottom: 16px; margin-top: 8px; }
+        .vol-role { font-size: 15px; margin-bottom: 5px; }
+        .vol-org { font-size: 13px; margin-bottom: 10px; }
+        .vol-time { font-size: 11px; margin-bottom: 12px; }
+        .vol-desc { font-size: 13px; }
+        .vol-status { font-size: 11px; padding: 3px 10px; margin-top: 14px; }
+
+        .vol-stats { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap: 24px; margin-top: 48px; }
+        .vol-stat-val { font-size: 28px; }
+        .vol-stat-lbl { font-size: 12px; margin-top: 4px; }
+        .vol-divider { width: 1px; height: 40px; }
+
+        /* Touch devices get a tap-scale instead of the mouse-tracking tilt */
+        @media (hover: none), (pointer: coarse) {
+          .vol-card:active { transform: scale(0.98) !important; transition: transform 0.15s; }
+        }
+
+        @media (max-width: 900px) {
+          .vol-section { padding: 64px 24px; }
+          .vol-header { margin-bottom: 40px; }
+        }
+
+        @media (max-width: 700px) {
+          .vol-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+        }
+
+        @media (max-width: 480px) {
+          .vol-header { margin-bottom: 32px; }
+          .vol-tag { font-size: 11px; padding: 4px 12px; margin-bottom: 12px; }
+          .vol-sub { font-size: 13.5px; padding: 0 8px; }
+
+          .vol-card { padding: 18px; border-radius: 20px; }
+          .vol-icon { width: 40px; height: 40px; font-size: 18px; margin-bottom: 12px; margin-top: 6px; border-radius: 12px; }
+          .vol-role { font-size: 13.5px; }
+          .vol-org { font-size: 12px; margin-bottom: 8px; }
+          .vol-time { font-size: 10.5px; margin-bottom: 10px; }
+          .vol-desc { font-size: 12px; line-height: 1.55; }
+          .vol-status { font-size: 10.5px; padding: 3px 9px; margin-top: 12px; }
+
+          /* Stats become a clean 2x2 grid — dividers don't wrap gracefully so we drop them here */
+          .vol-stats { display:grid; grid-template-columns:repeat(2,1fr); gap: 20px 12px; margin-top: 32px; }
+          .vol-divider { display: none; }
+          .vol-stat-val { font-size: 24px; }
+          .vol-stat-lbl { font-size: 11px; }
+        }
+
+        @media (max-width: 440px) {
+          .vol-grid { grid-template-columns: 1fr; }
+        }
       `}</style>
     </section>
   );

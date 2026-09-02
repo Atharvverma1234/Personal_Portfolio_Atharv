@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 
 const blocks = [
@@ -114,12 +114,13 @@ const typeStyles = {
   },
 };
 
-const EduBlock = ({ block, t, isDarkMode }) => {
+const EduBlock = ({ block, t, isDarkMode, isTouch }) => {
   const ref = useRef(null);
   const ts = typeStyles[block.type];
   const isCollege = block.type === 'college';
 
   const onMove = (e) => {
+    if (isTouch) return;
     const el = ref.current; if (!el) return;
     const r = el.getBoundingClientRect();
     const dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
@@ -131,6 +132,7 @@ const EduBlock = ({ block, t, isDarkMode }) => {
       : '8px 16px 40px rgba(99,102,241,0.12)';
   };
   const onLeave = () => {
+    if (isTouch) return;
     const el = ref.current; if (!el) return;
     el.style.transform = '';
     el.style.borderColor = isDarkMode ? 'rgba(99,102,241,0.15)' : 'rgba(99,102,241,0.15)';
@@ -140,10 +142,11 @@ const EduBlock = ({ block, t, isDarkMode }) => {
   return (
     <div
       ref={ref}
+      className="edu-block"
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       style={{
-        borderRadius: 28, padding: 36,
+        borderRadius: 28,
         background: t.cardBg,
         border: `1px solid rgba(99,102,241,0.15)`,
         borderLeft: `3px solid ${ts.accentBar}`,
@@ -156,59 +159,59 @@ const EduBlock = ({ block, t, isDarkMode }) => {
       {/* Shine */}
       <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg,rgba(255,255,255,0.03),transparent)', pointerEvents:'none', borderRadius:28 }} />
       {/* Bottom edge slab */}
-      <div style={{ position:'absolute', bottom:-14, left:20, right:20, height:14, borderRadius:'0 0 8px 8px', background:ts.edgeBg, pointerEvents:'none' }} />
+      <div className="edu-block-edge" style={{ position:'absolute', bottom:-14, left:20, right:20, height:14, borderRadius:'0 0 8px 8px', background:ts.edgeBg, pointerEvents:'none' }} />
 
       {/* Type badge */}
-      <div style={{
+      <div className="edu-type-badge" style={{
         display:'inline-flex', alignItems:'center', gap:6,
-        fontSize:11, fontWeight:600, padding:'4px 12px', borderRadius:100,
-        letterSpacing:'0.08em', textTransform:'uppercase', marginBottom:24,
+        fontWeight:600, borderRadius:100,
+        letterSpacing:'0.08em', textTransform:'uppercase',
         background: ts.typeBg, border:`1px solid ${ts.typeBorder}`, color:ts.typeText,
       }}>
         {block.typeLabel}
       </div>
 
       {/* Logo + institution */}
-      <div style={{ display:'flex', alignItems:'center', gap:16, marginBottom:20 }}>
-        <div style={{
-          width:60, height:60, borderRadius:18, flexShrink:0,
+      <div className="edu-inst-row" style={{ display:'flex', alignItems:'center' }}>
+        <div className="edu-logo" style={{
+          borderRadius:18, flexShrink:0,
           background: ts.logoBg, border:`1px solid ${ts.logoBorder}`,
-          display:'flex', alignItems:'center', justifyContent:'center', fontSize:28,
+          display:'flex', alignItems:'center', justifyContent:'center',
         }}>
           {block.icon}
         </div>
-        <div>
-          <div style={{ fontFamily:"'Syne',sans-serif", fontSize:18, fontWeight:800, color:t.instColor, marginBottom:3, transition:'color 0.3s' }}>
+        <div style={{ minWidth:0 }}>
+          <div className="edu-inst-name" style={{ fontFamily:"'Syne',sans-serif", fontWeight:800, color:t.instColor, transition:'color 0.3s' }}>
             {block.institution}
           </div>
-          <div style={{ fontSize:12, color:t.locColor, display:'flex', alignItems:'center', gap:4, transition:'color 0.3s' }}>
+          <div className="edu-loc" style={{ color:t.locColor, display:'flex', alignItems:'center', gap:4, transition:'color 0.3s' }}>
             📍 {block.location}
           </div>
         </div>
       </div>
 
       {/* Degree */}
-      <div style={{ fontSize:14, fontWeight:500, color:t.degreeColor, lineHeight:1.55, marginBottom:16, transition:'color 0.3s' }}>
+      <div className="edu-degree" style={{ fontWeight:500, color:t.degreeColor, lineHeight:1.55, transition:'color 0.3s' }}>
         {block.degree}
         <br />
-        <span style={{ fontSize:12, color:t.subDegreeColor, fontWeight:400, transition:'color 0.3s' }}>
+        <span className="edu-subdegree" style={{ color:t.subDegreeColor, fontWeight:400, transition:'color 0.3s' }}>
           {block.subDegree}
         </span>
       </div>
 
       {/* Badges */}
-      <div style={{ display:'flex', flexWrap:'wrap', gap:8, marginBottom:16 }}>
-        <span style={{
-          display:'inline-flex', alignItems:'center', fontSize:11, fontWeight:500,
-          padding:'4px 12px', borderRadius:100,
+      <div className="edu-badges" style={{ display:'flex', flexWrap:'wrap' }}>
+        <span className="edu-gpa-badge" style={{
+          display:'inline-flex', alignItems:'center', fontWeight:500,
+          borderRadius:100,
           background:t.gpaBg, border:`1px solid ${t.gpaBorder}`, color:t.gpaText,
           transition:'all 0.3s',
         }}>
           {block.grade}
         </span>
-        <span style={{
-          display:'inline-flex', alignItems:'center', gap:5, fontSize:11, fontWeight:500,
-          padding:'4px 12px', borderRadius:100,
+        <span className="edu-dur-badge" style={{
+          display:'inline-flex', alignItems:'center', gap:5, fontWeight:500,
+          borderRadius:100,
           background:ts.durBg, border:`1px solid ${ts.durBorder}`, color:ts.durText,
         }}>
           📅 {block.duration}
@@ -216,15 +219,15 @@ const EduBlock = ({ block, t, isDarkMode }) => {
       </div>
 
       {/* Description */}
-      <p style={{ fontSize:13, color:t.descColor, lineHeight:1.7, transition:'color 0.3s' }}>
+      <p className="edu-desc" style={{ color:t.descColor, lineHeight:1.7, transition:'color 0.3s' }}>
         {block.description}
       </p>
 
       {/* Tag pills */}
-      <div style={{ display:'flex', flexWrap:'wrap', gap:6, marginTop:18 }}>
+      <div className="edu-tags" style={{ display:'flex', flexWrap:'wrap' }}>
         {block.tags.map((tag) => (
-          <span key={tag} style={{
-            fontSize:11, padding:'3px 10px', borderRadius:100,
+          <span key={tag} className="edu-tag-pill" style={{
+            borderRadius:100,
             background: isCollege ? t.pillTagBg : t.pillTagBgSchool,
             border: `1px solid ${isCollege ? t.pillTagBorder : t.pillTagBorderSchool}`,
             color: isCollege ? t.pillTagText : '#c084fc',
@@ -241,30 +244,32 @@ const EduBlock = ({ block, t, isDarkMode }) => {
 const Education = () => {
   const { isDarkMode } = useTheme();
   const t = isDarkMode ? dark : light;
+  const [isTouch] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(hover: none), (max-width: 768px)').matches
+  );
 
   return (
     <section
       id="education"
+      className="edu-section"
       style={{
         background: 'transparent',
-        padding: '80px 32px',
         fontFamily: "'DM Sans', sans-serif",
         overflow: 'hidden', position: 'relative',
         transition: 'background 0.35s',
       }}
     >
-      
-      
+
       {/* Header */}
-      <div style={{ textAlign:'center', marginBottom:56, position:'relative', zIndex:1 }}>
-        <span style={{
+      <div className="edu-header" style={{ textAlign:'center', position:'relative', zIndex:1 }}>
+        <span className="edu-tag" style={{
           display:'inline-flex', alignItems:'center', gap:8,
-          fontSize:12, fontWeight:500, padding:'5px 14px', borderRadius:100,
+          fontWeight:500, borderRadius:100,
           background:t.tagBg, border:`1px solid ${t.tagBorder}`, color:t.tagText,
-          letterSpacing:'0.08em', textTransform:'uppercase', marginBottom:16,
+          letterSpacing:'0.08em', textTransform:'uppercase',
         }}>Education</span>
-        <h2 style={{
-          fontFamily:"'Syne',sans-serif", fontSize:'clamp(32px,4.5vw,50px)',
+        <h2 className="edu-heading" style={{
+          fontFamily:"'Syne',sans-serif",
           fontWeight:800, color:t.heading, letterSpacing:'-.02em', lineHeight:1.1,
           transition:'color 0.35s',
         }}>
@@ -272,25 +277,81 @@ const Education = () => {
             Education
           </span>{' '}& Learning
         </h2>
-        <p style={{ fontSize:15, color:t.sub, marginTop:10, transition:'color 0.3s' }}>
+        <p className="edu-sub" style={{ color:t.sub, transition:'color 0.3s' }}>
           My academic journey and where it all began
         </p>
       </div>
 
       {/* Two blocks */}
-      <div style={{
-        display:'grid', gridTemplateColumns:'1fr 1fr', gap:28,
-        maxWidth:900, margin:'0 auto', position:'relative', zIndex:1,
+      <div className="edu-grid" style={{
+        display:'grid', margin:'0 auto', position:'relative', zIndex:1,
       }}>
         {blocks.map((block) => (
-          <EduBlock key={block.type} block={block} t={t} isDarkMode={isDarkMode} />
+          <EduBlock key={block.type} block={block} t={t} isDarkMode={isDarkMode} isTouch={isTouch} />
         ))}
       </div>
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
-        @media(max-width:640px){
-          .ed-two-grid { grid-template-columns: 1fr !important; }
+
+        .edu-section { padding: 80px 32px; }
+
+        .edu-header { margin-bottom: 56px; }
+        .edu-tag { font-size: 12px; padding: 5px 14px; margin-bottom: 16px; }
+        .edu-heading { font-size: clamp(30px, 6vw, 50px); }
+        .edu-sub { font-size: 15px; margin-top: 10px; }
+
+        .edu-grid { grid-template-columns: 1fr 1fr; gap: 28px; max-width: 900px; }
+
+        .edu-block { padding: 36px; }
+        .edu-type-badge { font-size: 11px; padding: 4px 12px; margin-bottom: 24px; }
+        .edu-inst-row { gap: 16px; margin-bottom: 20px; }
+        .edu-logo { width: 60px; height: 60px; font-size: 28px; }
+        .edu-inst-name { font-size: 18px; margin-bottom: 3px; }
+        .edu-loc { font-size: 12px; }
+        .edu-degree { font-size: 14px; margin-bottom: 16px; }
+        .edu-subdegree { font-size: 12px; }
+        .edu-badges { gap: 8px; margin-bottom: 16px; }
+        .edu-gpa-badge, .edu-dur-badge { font-size: 11px; padding: 4px 12px; }
+        .edu-desc { font-size: 13px; }
+        .edu-tags { gap: 6px; margin-top: 18px; }
+        .edu-tag-pill { font-size: 11px; padding: 3px 10px; }
+
+        /* Tilt only where hover + a real pointer exist; touch gets a tap-scale instead */
+        @media (hover: none), (pointer: coarse) {
+          .edu-block:active { transform: scale(0.98) !important; transition: transform 0.15s; }
+        }
+
+        @media (max-width: 900px) {
+          .edu-section { padding: 64px 24px; }
+          .edu-header { margin-bottom: 40px; }
+          .edu-grid { grid-template-columns: 1fr; gap: 20px; max-width: 560px; }
+          .edu-block { padding: 28px; }
+        }
+
+        @media (max-width: 480px) {
+          .edu-header { margin-bottom: 32px; }
+          .edu-tag { font-size: 11px; padding: 4px 12px; margin-bottom: 12px; }
+          .edu-sub { font-size: 13.5px; padding: 0 8px; }
+
+          .edu-block { padding: 20px; border-radius: 22px; }
+          .edu-block-edge { left: 14px; right: 14px; }
+          .edu-type-badge { font-size: 10px; padding: 3px 10px; margin-bottom: 18px; }
+          .edu-inst-row { gap: 12px; margin-bottom: 16px; }
+          .edu-logo { width: 48px; height: 48px; font-size: 22px; border-radius: 14px; }
+          .edu-inst-name { font-size: 15.5px; }
+          .edu-loc { font-size: 11px; }
+          .edu-degree { font-size: 13px; margin-bottom: 14px; }
+          .edu-subdegree { font-size: 11px; }
+          .edu-badges { gap: 6px; margin-bottom: 14px; }
+          .edu-gpa-badge, .edu-dur-badge { font-size: 10.5px; padding: 3px 10px; }
+          .edu-desc { font-size: 12.5px; line-height: 1.6; }
+          .edu-tags { gap: 5px; margin-top: 14px; }
+          .edu-tag-pill { font-size: 10.5px; padding: 3px 9px; }
+        }
+
+        @media (max-width: 340px) {
+          .edu-inst-row { flex-direction: column; align-items: flex-start; gap: 10px; }
         }
       `}</style>
     </section>

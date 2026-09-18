@@ -10,7 +10,7 @@ const blocks = [
     location: 'Bangalore, Karnataka, India',
     degree: 'Bachelore of Technology (B.Tech)',
     subDegree: 'Electrical & Electronics Engineering',
-    grade: 'CGPA 9 / 10',
+    grade: 'CGPA 8.38 / 10',
     duration: '2023 – 2027',
     description:
       'Currently pursuing a B.Tech in Electrical & Electronics Engineering with a focus on AI and Machine Learning. Engaged in various research projects and actively participating in tech symposiums and hackathons.',

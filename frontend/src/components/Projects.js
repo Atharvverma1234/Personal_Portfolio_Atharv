@@ -1,68 +1,86 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 
+
 const projects = [
   {
     id: 1,
     number: '01',
-    category: 'E-Commerce',
-    title: 'E-Commerce Platform',
-    description: 'Full-stack e-commerce solution with React, Node.js, and MongoDB. Includes cart, payments, and admin dashboard.',
-    tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-    icon: '🛍️',
+    category: 'AI / DevOps',
+    title: 'PulseOps',
+    description:
+      'AI-powered DevOps incident intelligence platform that monitors infrastructure, detects anomalies, manages incidents, and generates AI-assisted root cause analysis.',
+    tags: ['React', 'Node.js', 'FastAPI', 'MongoDB', 'Redis', 'Docker', 'AI'],
+    icon: '⚡',
     accent: '#818cf8',
     accentGlow: 'rgba(129,140,248,0.6)',
-    bannerDark: 'linear-gradient(135deg,#1e1b4b 0%,#312e81 50%,#1e1b4b 100%)',
-    bannerLight: 'linear-gradient(135deg,#ede9fe 0%,#ddd6fe 50%,#ede9fe 100%)',
-    github: '#',
+    bannerDark:
+      'linear-gradient(135deg,#1e1b4b 0%,#312e81 50%,#1e1b4b 100%)',
+    bannerLight:
+      'linear-gradient(135deg,#ede9fe 0%,#ddd6fe 50%,#ede9fe 100%)',
+    github: 'https://github.com/Atharvverma1234/Pulse_Ops',
     live: '#',
   },
+
   {
     id: 2,
     number: '02',
-    category: 'Productivity',
-    title: 'Task Management App',
-    description: 'Collaborative task management with real-time updates, drag-and-drop boards, and team notifications.',
-    tags: ['React', 'Express', 'Socket.io', 'MongoDB'],
-    icon: '✅',
+    category: 'Healthcare AI',
+    title: 'Sentri ICU',
+    description:
+      'AI-powered ICU monitoring platform designed to identify patient deterioration and early sepsis risk using real-time vitals, machine learning predictions, and automated alerts.',
+    tags: ['Next.js', 'Node.js', 'FastAPI', 'XGBoost', 'Groq', 'n8n'],
+    icon: '🩺',
     accent: '#38bdf8',
     accentGlow: 'rgba(56,189,248,0.6)',
-    bannerDark: 'linear-gradient(135deg,#0c1a2e 0%,#0f3460 50%,#0c1a2e 100%)',
-    bannerLight: 'linear-gradient(135deg,#e0f2fe 0%,#bae6fd 50%,#e0f2fe 100%)',
-    github: '#',
-    live: '#',
+    bannerDark:
+      'linear-gradient(135deg,#0c1a2e 0%,#0f3460 50%,#0c1a2e 100%)',
+    bannerLight:
+      'linear-gradient(135deg,#e0f2fe 0%,#bae6fd 50%,#e0f2fe 100%)',
+    github: 'https://github.com/Atharvverma1234/sentri',
+    live: 'https://sentri-ll6c.vercel.app/',
   },
+
   {
     id: 3,
     number: '03',
-    category: 'Analytics',
-    title: 'AI Analytics Dashboard',
-    description: 'Data visualisation dashboard powered by OpenAI, with real-time charts, filters, and exportable reports.',
-    tags: ['Next.js', 'OpenAI', 'D3.js', 'Tailwind'],
-    icon: '📊',
+    category: 'CivicTech / AI',
+    title: 'Nagar AI',
+    description:
+      'AI-powered municipal grievance platform that classifies citizen complaints, routes them to the appropriate department, and generates actionable civic insights.',
+    tags: ['React', 'Node.js', 'Express', 'IBM Granite', 'AI', 'REST API'],
+    icon: '🏙️',
     accent: '#c084fc',
     accentGlow: 'rgba(192,132,252,0.6)',
-    bannerDark: 'linear-gradient(135deg,#1a0a2e 0%,#2d1b69 50%,#1a0a2e 100%)',
-    bannerLight: 'linear-gradient(135deg,#faf5ff 0%,#ede9fe 50%,#faf5ff 100%)',
-    github: '#',
+    bannerDark:
+      'linear-gradient(135deg,#1a0a2e 0%,#2d1b69 50%,#1a0a2e 100%)',
+    bannerLight:
+      'linear-gradient(135deg,#faf5ff 0%,#ede9fe 50%,#faf5ff 100%)',
+    github: 'https://github.com/Atharvverma1234/grievance-triage-tool',
     live: '#',
   },
+
   {
     id: 4,
     number: '04',
-    category: 'Communication',
-    title: 'Real-Time Chat App',
-    description: 'Scalable messaging platform with rooms, file sharing, emoji reactions, and end-to-end encryption.',
-    tags: ['React', 'Socket.io', 'Redis', 'AWS'],
-    icon: '💬',
+    category: 'Full Stack',
+    title: 'BlogVibe',
+    description:
+      'Full-stack blogging platform with secure authentication, user-generated content, responsive interfaces, and a RESTful backend built with the MERN stack.',
+    tags: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Tailwind'],
+    icon: '✍️',
     accent: '#34d399',
     accentGlow: 'rgba(52,211,153,0.6)',
-    bannerDark: 'linear-gradient(135deg,#0a1a1a 0%,#0d3d3d 50%,#0a1a1a 100%)',
-    bannerLight: 'linear-gradient(135deg,#ecfdf5 0%,#a7f3d0 50%,#ecfdf5 100%)',
-    github: '#',
+    bannerDark:
+      'linear-gradient(135deg,#0a1a1a 0%,#0d3d3d 50%,#0a1a1a 100%)',
+    bannerLight:
+      'linear-gradient(135deg,#ecfdf5 0%,#a7f3d0 50%,#ecfdf5 100%)',
+    github: 'https://github.com/Atharvverma1234/Blog-App',
     live: '#',
   },
 ];
+
+
 
 const dark = {
   sectionBg:    '#060912',

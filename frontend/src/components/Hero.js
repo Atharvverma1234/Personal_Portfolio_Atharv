@@ -83,7 +83,7 @@ const Hero = () => {
 
   const chips = [
     { label: 'React Dev',    icon: '⚛️', style: { top: 40, left: -64 },  iconBg: isDarkMode ? 'rgba(99,102,241,0.15)' : 'rgba(99,102,241,0.1)',  delay: '0s'   },
-    { label: 'Kaiju Killer', icon: '🤖', style: { bottom: 56, right: -48 }, iconBg: isDarkMode ? 'rgba(192,132,252,0.15)' : 'rgba(192,132,252,0.1)', delay: '1.5s' },
+    { label: 'Full Stack Dev', icon: '🤖', style: { bottom: 56, right: -48 }, iconBg: isDarkMode ? 'rgba(192,132,252,0.15)' : 'rgba(192,132,252,0.1)', delay: '1.5s' },
     { label: 'Open to work', icon: null, style: { top: '50%', left: -80 }, delay: '0.8s', dot: true },
   ];
 
@@ -127,33 +127,46 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-wrap gap-3">
-              <button
-                className="text-white px-7 py-3 rounded-full text-sm font-medium transition-all duration-200 hover:scale-105"
-                style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6)', boxShadow: '0 0 30px rgba(99,102,241,0.35)' }}
+            <button
+               onClick={() => {
+                document.getElementById('projects')?.scrollIntoView({
+                behavior: 'smooth',
+              });
+            }}
+              className="text-white px-7 py-3 rounded-full text-sm font-medium transition-all duration-200 hover:scale-105"
+              style={{
+               background: 'linear-gradient(135deg,#6366f1,#8b5cf6)',
+                boxShadow: '0 0 30px rgba(99,102,241,0.35)',
+              }}
               >
-                View Projects
-              </button>
-              <button
-                className="px-7 py-3 rounded-full text-sm font-medium transition-all duration-200"
-                style={{ border: `1px solid ${t.btnOutlineBorder}`, color: t.btnOutlineText }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = t.btnOutlineHoverBorder; e.currentTarget.style.color = t.btnOutlineHoverText; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = t.btnOutlineBorder;       e.currentTarget.style.color = t.btnOutlineText; }}
-              >
-                Contact Me
-              </button>
-            </div>
+               View Projects
+            </button>
 
-            <div className="flex gap-5 mt-1">
-              {['GitHub', 'LinkedIn', 'Twitter', 'Instagram'].map((s) => (
-                <a
-                  key={s} href="/"
-                  className="text-sm tracking-wide transition-colors duration-200 hover:text-indigo-400"
-                  style={{ color: t.socialText }}
-                >
-                  {s}
-                </a>
-              ))}
-            </div>
+           <button
+             onClick={() => {
+             document.getElementById('contact')?.scrollIntoView({
+               behavior: 'smooth',
+              });
+                }}
+              className="px-7 py-3 rounded-full text-sm font-medium transition-all duration-200"
+              style={{
+               border: `1px solid ${t.btnOutlineBorder}`,
+                color: t.btnOutlineText,
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.borderColor = t.btnOutlineHoverBorder;
+              e.currentTarget.style.color = t.btnOutlineHoverText;
+            }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = t.btnOutlineBorder;
+               e.currentTarget.style.color = t.btnOutlineText;
+            }}
+           >
+           Contact Me
+          </button>
+        </div>
+
+            
           </div>
 
           {/* ── Right — 3D Card ── */}

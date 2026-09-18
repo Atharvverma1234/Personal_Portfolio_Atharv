@@ -72,7 +72,7 @@ const experiences = [
 ];
 
 const stats = [
-  { value: "2+", label: "Years experience" },
+  { value: "1+", label: "Years experience" },
   { value: "15+", label: "Projects completed" },
   { value: "100%", label: "Client satisfaction" },
   { value: "100+", label: "Users impacted" },

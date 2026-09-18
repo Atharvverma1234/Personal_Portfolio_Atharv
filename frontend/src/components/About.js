@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
 
 const stats = [
-  { value: "2+",   label: "Years experience"   },
+  { value: "1+",   label: "Years experience"   },
   { value: "15+",  label: "Projects completed"  },
   { value: "100%", label: "Client satisfaction" },
   { value: "24/7", label: "Availability"        },
@@ -295,7 +295,7 @@ const About = () => {
               {/* Floating badges */}
               <FloatBadge t={t} delay={0} className="about-badge-years">
                 <div>
-                  <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 20, fontWeight: 800, background: "linear-gradient(135deg,#818cf8,#c084fc)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", lineHeight: 1 }}>3+</div>
+                  <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 20, fontWeight: 800, background: "linear-gradient(135deg,#818cf8,#c084fc)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", lineHeight: 1 }}>1+</div>
                   <div style={{ fontSize: 11, color: "#94a3b8", marginTop: 1 }}>Years Exp</div>
                 </div>
               </FloatBadge>
